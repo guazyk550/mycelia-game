@@ -1,0 +1,63 @@
+# 说明：这个文件只影响 GitHub Actions 对 Pages 的构建与发布，不参与游戏本身。
+# 部署目标：https://<用户名>.github.io/<仓库名>/
+# 之所以不需要额外配置，是因为 vite.config.ts 里 base 用的是 './'（相对路径），
+# 产物放到任意子路径下都能正常加载。
+
+name: 部署到 GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # 也可以在仓库的 Actions 页面手动点一下触发
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: 构建
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取出代码
+        uses: actions/checkout@v4
+
+      - name: 准备 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 构建（vite build → dist/）
+        run: npm run build
+
+      - name: 启用并配置 Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: 上传构建产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: 部署
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 发布到 Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
