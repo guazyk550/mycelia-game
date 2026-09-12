@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.vite/
+*.log
+.DS_Store
+saves/
+sim-out/
+
+# Capacitor 生成的原生工程（可随时用 cap add android 重建）
+android/
+
+# 交付物里的 APK 体积较大，按需决定是否入库
+release/*.apk

@@ -1,0 +1,41 @@
+{
+  "name": "mycelia",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "《共生之网》 Mycelia — 拓扑驱动的增量游戏 / topology-driven incremental game",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "test:ui": "node scripts/ui-smoke.mjs",
+    "sim": "node src/sim/run.ts",
+    "check:data": "node scripts/validate-data.ts",
+    "check:reach": "node scripts/check-reachability.ts",
+    "shots": "node scripts/ui-shots.mjs",
+    "shots:extra": "node scripts/ui-shots-extra.mjs",
+    "check:naming": "node scripts/check-naming.ts",
+    "build:mobile": "vite build && cap sync android",
+    "build:apk": "npm run build:mobile && cd android && gradlew.bat assembleDebug",
+    "build:apk:unix": "npm run build:mobile && cd android && ./gradlew assembleDebug",
+    "shots:mobile": "node scripts/mobile-shots.mjs",
+    "audit:mobile": "node scripts/mobile-audit.mjs",
+    "test:mobile": "node scripts/mobile-ops.mjs",
+    "test:mobile:fix": "node scripts/mobile-fix-check.mjs"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.2",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.9.2",
+    "vite": "^6.0.7"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/core": "^8.5.2"
+  }
+}

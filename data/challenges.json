@@ -1,0 +1,749 @@
+{
+  "tableVersion": 1,
+  "modifierKinds": [
+    "richnessCap — 地块富饶度上限（百分点）",
+    "banClass — 禁用某个节点类",
+    "banResource — 禁用某个资源（产出与使用均被封锁）",
+    "costGrowthAdd — 所有成本增长率 +N",
+    "noAutomation — 自动化全部失效",
+    "noOffline — 离线收益归零",
+    "reverseRecipes — 配方输入输出互换",
+    "resourceZero — 某个资源恒为 0 且不可生产",
+    "randomRelink — 每 N 秒随机重连一条边",
+    "marketClosed — 菌市关闭",
+    "nodeDecay — 节点每秒有 N% 概率凋亡",
+    "hostilityNoDecay — 敌意值永不衰减",
+    "noLight — 光照类节点禁用且昼夜消失",
+    "outputPenalty — 某资源产出惩罚（比例）",
+    "toxinSelfDamageMul — 毒素自伤倍率",
+    "timeLimitSec — 时限（秒），超时判定失败",
+    "nodeCapMax — 节点总数上限",
+    "linkCapMax — 连线总数上限",
+    "eventRateMul — 事件频率倍率",
+    "richnessFloorLow — 枯竭下限降低到 N%",
+    "resourceTheft — 每秒有 N% 概率被偷走一部分资源",
+    "matrixShuffle — 每 N 秒随机重排催化矩阵一条规则",
+    "noCarryover — 孢子化不保留任何节点",
+    "outDegreeMax — 每个节点出度上限",
+    "depletionMul — 土壤损伤（抽枯竭）倍率",
+    "layersOnly — 只允许在指定基质层建造（value 为层 id）",
+    "noPrestige — 禁止孢子化",
+    "buildSpeedMul — 建造速度倍率",
+    "richnessSimmer — 土壤富饶度每秒小幅随机波动"
+  ],
+  "challenges": [
+    {
+      "id": "ch_barren",
+      "name": "贫瘠世界",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "richnessCap",
+          "value": 40
+        },
+        {
+          "kind": "richnessFloorLow",
+          "value": 10
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "sporogene",
+        "amount": "25"
+      },
+      "reward": {
+        "kind": "grantResource",
+        "res": "voidspore",
+        "value": 1,
+        "desc": "奖励：虚空孢子 ×1（解锁隐藏层「虚空菌床」）"
+      },
+      "desc": "土壤上限被压到 40%。你必须在最贫瘠的地块上活下来。"
+    },
+    {
+      "id": "ch_energy_ban",
+      "name": "能源禁令",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "banClass",
+          "value": "symbiont"
+        },
+        {
+          "kind": "noLight",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "1000000"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "recipe_dark_sugar",
+        "desc": "解锁无光糖化配方"
+      },
+      "desc": "微光被夺走，共生体无法存活。糖只能从黑暗里榨出来。"
+    },
+    {
+      "id": "ch_single_class",
+      "name": "单一生产",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "nodeCapMax",
+          "value": 60
+        },
+        {
+          "kind": "outDegreeMax",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "core",
+        "amount": "3"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.25,
+        "desc": "所选节点类吞吐 +25%"
+      },
+      "desc": "每个节点只能有一根出线。你必须把网络压成一条鞭子。"
+    },
+    {
+      "id": "ch_time_freeze",
+      "name": "时间冻结",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "noAutomation",
+          "value": 1
+        },
+        {
+          "kind": "noOffline",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "sclerotium",
+        "amount": "50"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 3,
+        "desc": "手动操作产出 ×3"
+      },
+      "desc": "自动化与离线全部失效。你的每一次点击都直接决定生死。"
+    },
+    {
+      "id": "ch_inflation",
+      "name": "通货膨胀",
+      "cat": "economy",
+      "modifiers": [
+        {
+          "kind": "costGrowthAdd",
+          "value": 0.05
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "50000000"
+      },
+      "reward": {
+        "kind": "resourceCap",
+        "value": 0.5,
+        "desc": "所有资源上限 +50%"
+      },
+      "desc": "所有成本增长率 +0.05。早买是唯一的策略。"
+    },
+    {
+      "id": "ch_reverse",
+      "name": "反向世界",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "reverseRecipes",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "gene",
+        "amount": "20"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "entropy_reverse_free",
+        "desc": "永久解锁逆熵生产"
+      },
+      "desc": "配方的输入与输出被调换。你熟悉的一切生产链都倒过来了。"
+    },
+    {
+      "id": "ch_silent_net",
+      "name": "无声网络",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "resourceZero",
+          "value": "pheromone"
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "signal",
+        "amount": "5"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "rule_slots_plus3",
+        "desc": "规则槽 +3"
+      },
+      "desc": "信息素恒为 0。网络无法说话，只能靠拓扑自己记住事情。"
+    },
+    {
+      "id": "ch_mirror_paradox",
+      "name": "镜像悖论",
+      "cat": "topology",
+      "modifiers": [
+        {
+          "kind": "randomRelink",
+          "value": 600
+        }
+      ],
+      "goal": {
+        "kind": "nodes",
+        "value": 80
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "mirror_node_free",
+        "desc": "永久解锁镜像节点"
+      },
+      "desc": "每 10 分钟，一条连线会自己换到别处。你要在流沙上盖房子。"
+    },
+    {
+      "id": "ch_no_market",
+      "name": "封闭经济",
+      "cat": "economy",
+      "modifiers": [
+        {
+          "kind": "marketClosed",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "honeydew",
+        "amount": "200000"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.2,
+        "desc": "蜜露产出 +20%"
+      },
+      "desc": "菌市关闭。你只能靠自己产出的东西活下去。"
+    },
+    {
+      "id": "ch_locust",
+      "name": "蝗灾纪元",
+      "cat": "event",
+      "modifiers": [
+        {
+          "kind": "eventRateMul",
+          "value": 3
+        },
+        {
+          "kind": "depletionMul",
+          "value": 2
+        }
+      ],
+      "goal": {
+        "kind": "time",
+        "value": 1800
+      },
+      "reward": {
+        "kind": "eventResist",
+        "value": 0.2,
+        "desc": "事件抗性 +20%"
+      },
+      "desc": "事件频率 ×3，土壤损伤 ×2。坚持 30 分钟。"
+    },
+    {
+      "id": "ch_deep_only",
+      "name": "深层居民",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "banClass",
+          "value": "extractor"
+        },
+        {
+          "kind": "layersOnly",
+          "value": "bedrock"
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "deepmass",
+        "amount": "500"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.3,
+        "desc": "深层节点产出 +30%"
+      },
+      "desc": "表层被封锁，采掘节点禁用。你只能从岩层之下开始。"
+    },
+    {
+      "id": "ch_no_prestige",
+      "name": "无退路",
+      "cat": "limit",
+      "modifiers": [
+        {
+          "kind": "noPrestige",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "law",
+        "amount": "1"
+      },
+      "reward": {
+        "kind": "prestigeGain",
+        "value": 0.25,
+        "desc": "孢子化收益 +25%"
+      },
+      "desc": "这一局你不能孢子化。一次也不能。"
+    },
+    {
+      "id": "ch_one_link",
+      "name": "单线网络",
+      "cat": "topology",
+      "modifiers": [
+        {
+          "kind": "linkCapMax",
+          "value": 40
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "signal",
+        "amount": "20"
+      },
+      "reward": {
+        "kind": "linkFlux",
+        "value": 0.5,
+        "desc": "连线通量 +50%"
+      },
+      "desc": "全网络最多 40 条连线。每一条都必须有价值。"
+    },
+    {
+      "id": "ch_fragile",
+      "name": "脆弱菌丝",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "nodeDecay",
+          "value": 0.0005
+        }
+      ],
+      "goal": {
+        "kind": "time",
+        "value": 1200
+      },
+      "reward": {
+        "kind": "buildCostDiscount",
+        "value": 0.15,
+        "desc": "建造成本 −15%"
+      },
+      "desc": "节点每秒有 0.05% 概率凋亡。你必须不停重建。"
+    },
+    {
+      "id": "ch_predator",
+      "name": "掠食者",
+      "cat": "event",
+      "modifiers": [
+        {
+          "kind": "hostilityNoDecay",
+          "value": 1
+        },
+        {
+          "kind": "eventRateMul",
+          "value": 1.5
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "toxin",
+        "amount": "50000"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.15,
+        "desc": "毒素产出 +15% 且自伤减半"
+      },
+      "desc": "敌意永不衰减。地表会一直记得你做过什么。"
+    },
+    {
+      "id": "ch_dark",
+      "name": "永夜",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "noLight",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "5000000"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "night_bloom",
+        "desc": "夜间产出不再衰减"
+      },
+      "desc": "太阳不再升起。你是这颗星球唯一的光源。"
+    },
+    {
+      "id": "ch_heavy",
+      "name": "重力异常",
+      "cat": "economy",
+      "modifiers": [
+        {
+          "kind": "costGrowthAdd",
+          "value": 0.1
+        },
+        {
+          "kind": "buildSpeedMul",
+          "value": 0.5
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "sclerotium",
+        "amount": "200"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.25,
+        "desc": "全局产出 +25%"
+      },
+      "desc": "成本增长率 +0.1，建造时间翻倍。这里的一切都很重。"
+    },
+    {
+      "id": "ch_scarcity",
+      "name": "稀有矿物",
+      "cat": "economy",
+      "modifiers": [
+        {
+          "kind": "outputPenalty",
+          "res": "mineral",
+          "value": 0.7
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "core",
+        "amount": "10"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.25,
+        "desc": "矿质产出 +25%"
+      },
+      "desc": "矿质产出 −70%。晶格与核心变成奢侈品。"
+    },
+    {
+      "id": "ch_toxic",
+      "name": "毒雾",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "toxinSelfDamageMul",
+          "value": 2
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "toxin",
+        "amount": "200000"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "toxin_immunity",
+        "desc": "毒素自伤永久 −50%"
+      },
+      "desc": "毒素自伤加倍。你要在毒里长大。"
+    },
+    {
+      "id": "ch_speedrun",
+      "name": "时限冲刺",
+      "cat": "limit",
+      "modifiers": [
+        {
+          "kind": "timeLimitSec",
+          "value": 1800
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "sporogene",
+        "amount": "10"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "speedrun_booster",
+        "desc": "孢子化后保留 10% 节点"
+      },
+      "desc": "30 分钟内完成孢子化门槛，否则失败。"
+    },
+    {
+      "id": "ch_minimal",
+      "name": "极简主义",
+      "cat": "limit",
+      "modifiers": [
+        {
+          "kind": "nodeCapMax",
+          "value": 30
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "core",
+        "amount": "5"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.6,
+        "desc": "每个节点产出 +100%（节点更少更强）"
+      },
+      "desc": "全网络最多 30 个节点。一个也不能浪费。"
+    },
+    {
+      "id": "ch_no_sugar",
+      "name": "无糖世界",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "resourceZero",
+          "value": "sugar"
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "honeydew",
+        "amount": "500000"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "sugarless_metabolism",
+        "desc": "解锁以蜜露为能量通货的配方"
+      },
+      "desc": "糖恒为 0。所有以糖为燃料的生产都停摆了。"
+    },
+    {
+      "id": "ch_storm",
+      "name": "腐殖风暴",
+      "cat": "event",
+      "modifiers": [
+        {
+          "kind": "eventRateMul",
+          "value": 4
+        },
+        {
+          "kind": "richnessSimmer",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "time",
+        "value": 2400
+      },
+      "reward": {
+        "kind": "eventResist",
+        "value": 0.3,
+        "desc": "事件抗性 +30%"
+      },
+      "desc": "事件频率 ×4，土壤每秒小幅波动。坚持 40 分钟。"
+    },
+    {
+      "id": "ch_isolate",
+      "name": "孤岛",
+      "cat": "topology",
+      "modifiers": [
+        {
+          "kind": "linkCapMax",
+          "value": 20
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "signal",
+        "amount": "10"
+      },
+      "reward": {
+        "kind": "catalystBonus",
+        "value": 0.1,
+        "desc": "所有催化倍率 +0.10"
+      },
+      "desc": "最多 20 条连线。你的一整张网络必须挤进这 20 根管道里。"
+    },
+    {
+      "id": "ch_echo",
+      "name": "回声审判",
+      "cat": "topology",
+      "modifiers": [
+        {
+          "kind": "randomRelink",
+          "value": 300
+        },
+        {
+          "kind": "matrixShuffle",
+          "value": 300
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "core",
+        "amount": "20"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "echo_lens",
+        "desc": "看清催化矩阵的所有隐藏条目"
+      },
+      "desc": "每 5 分钟，一条连线和一条催化规则会同时随机变动。"
+    },
+    {
+      "id": "ch_depleted",
+      "name": "死土",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "richnessCap",
+          "value": 25
+        },
+        {
+          "kind": "depletionMul",
+          "value": 1.5
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "humus",
+        "amount": "100000000"
+      },
+      "reward": {
+        "kind": "richnessFloor",
+        "value": 15,
+        "desc": "枯竭下限 +15%"
+      },
+      "desc": "富饶度上限 25% 且消耗 ×1.5。这里曾经是一片森林。"
+    },
+    {
+      "id": "ch_thief",
+      "name": "窃贼",
+      "cat": "event",
+      "modifiers": [
+        {
+          "kind": "resourceTheft",
+          "value": 0.001
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "honeydew",
+        "amount": "100000"
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.2,
+        "desc": "契约收益 +20%"
+      },
+      "desc": "每秒有 0.1% 概率被盗走一部分资源。你得追上去。"
+    },
+    {
+      "id": "ch_lawless",
+      "name": "无序",
+      "cat": "rule",
+      "modifiers": [
+        {
+          "kind": "matrixShuffle",
+          "value": 120
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "sclerotium",
+        "amount": "150"
+      },
+      "reward": {
+        "kind": "catalystBonus",
+        "value": 0.15,
+        "desc": "所有催化倍率 +0.15"
+      },
+      "desc": "催化矩阵每 2 分钟随机变动一次。没有什么是稳定的。"
+    },
+    {
+      "id": "ch_second_life",
+      "name": "第二人生",
+      "cat": "limit",
+      "modifiers": [
+        {
+          "kind": "noCarryover",
+          "value": 1
+        }
+      ],
+      "goal": {
+        "kind": "prestige",
+        "value": 3
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "rebirth_gift",
+        "desc": "孢子化后额外获得 5 个起始节点"
+      },
+      "desc": "孢子化不保留任何节点。连做 3 次。"
+    },
+    {
+      "id": "ch_final",
+      "name": "星尘之种",
+      "cat": "limit",
+      "modifiers": [
+        {
+          "kind": "costGrowthAdd",
+          "value": 0.04
+        },
+        {
+          "kind": "eventRateMul",
+          "value": 2
+        },
+        {
+          "kind": "richnessCap",
+          "value": 60
+        },
+        {
+          "kind": "linkCapMax",
+          "value": 150
+        }
+      ],
+      "goal": {
+        "kind": "resource",
+        "res": "stardust",
+        "amount": "100"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "panspermia_key",
+        "desc": "解锁星际播种（终局）"
+      },
+      "desc": "所有诅咒叠加的综合极限：你要在受限的土地上种出星尘。"
+    }
+  ]
+}

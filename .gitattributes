@@ -1,0 +1,9 @@
+# 换行符策略：文本一律 LF 入库、二进制不做转换。
+# 目的：不依赖每个人的 git autocrlf 设置 —— 否则同一个文件在不同机器上
+# 会以不同换行符存储，diff 出现整文件级噪声，shell 脚本也可能在 Linux 上跑不起来。
+* text=auto eol=lf
+
+# 二进制：显式声明，避免被当作文本处理
+*.png binary
+*.apk binary
+*.ico binary

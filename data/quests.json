@@ -1,0 +1,988 @@
+{
+  "tableVersion": 1,
+  "categories": [
+    {
+      "id": "tutorial",
+      "name": "新手",
+      "desc": "前 20 分钟的引导：每一步都能在 30 秒内完成，绝不让玩家空窗。"
+    },
+    {
+      "id": "daily",
+      "name": "日常",
+      "desc": "短周期目标，鼓励每天回来优化一次网络。"
+    },
+    {
+      "id": "longterm",
+      "name": "长期",
+      "desc": "推动玩家探索系统边界。"
+    },
+    {
+      "id": "hidden",
+      "name": "隐藏",
+      "desc": "需要玩家自己发现的条件。"
+    },
+    {
+      "id": "meta",
+      "name": "Meta",
+      "desc": "要求多个系统协同的终局任务。"
+    }
+  ],
+  "quests": [
+    {
+      "id": "q_first_hypha",
+      "name": "第一根菌丝",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "buildNode",
+        "node": "decomposer_i",
+        "count": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "5"
+      },
+      "requires": [],
+      "desc": "你的第一根菌丝已经在你脚下。确认它开始进食。",
+      "hint": "在左侧「分解丝 I」上点一下选中，然后在画布上点一下放下。它靠土壤里的腐殖质吃饭 —— 土壤到处都是，所以你从第一秒就有产出。"
+    },
+    {
+      "id": "q_water",
+      "name": "找水",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "buildNode",
+        "node": "hydra_i",
+        "count": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "5"
+      },
+      "requires": [
+        "q_first_hypha"
+      ],
+      "desc": "没有水就没有任何反应。长出一根吸水菌丝。",
+      "hint": "水不够用了？左侧点「吸水菌丝 I」再放到画布上。它不吃东西，只抽水 —— 糖化腔没有水就是废铁。"
+    },
+    {
+      "id": "q_first_link",
+      "name": "第一次连接",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "links",
+        "value": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "5"
+      },
+      "requires": [
+        "q_first_hypha"
+      ],
+      "desc": "把两个节点连起来。资源不会自己走过去。",
+      "hint": "把两个节点连起来：按住一个节点拖到另一个节点上（Shift+拖拽也能连线）。连线决定催化加成。"
+    },
+    {
+      "id": "q_first_sugar",
+      "name": "第一口糖",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "10"
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "10"
+      },
+      "requires": [
+        "q_water",
+        "q_first_link"
+      ],
+      "desc": "腐殖质需要被水解成糖。去建造糖化腔。",
+      "hint": "糖化腔把腐殖质变成糖，但它需要水。先确认已经有吸水菌丝，再建糖化腔。"
+    },
+    {
+      "id": "q_sporangium",
+      "name": "自己长大",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "buildNode",
+        "node": "sporangium_i",
+        "count": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "50"
+      },
+      "requires": [
+        "q_first_sugar"
+      ],
+      "desc": "孢子囊让你不再依赖初始那点孢子。这是自持的第一步。",
+      "hint": "孢子囊自己产孢子，是你唯一的\"钱\"。建在表土层就行（便宜、够用），别一开始就追求高倍率的层。"
+    },
+    {
+      "id": "q_expand_10",
+      "name": "扩张",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "nodes",
+        "value": 10
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "50"
+      },
+      "requires": [
+        "q_sporangium"
+      ],
+      "desc": "把网络扩展到 10 个节点。",
+      "hint": "把节点铺到 10 个。注意每层有节点上限 —— 建造面板顶部有层选择器，表土层满了就换含水层（产出 ×3）。"
+    },
+    {
+      "id": "q_first_enzyme",
+      "name": "催化者",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "buildNode",
+        "node": "enzyme_gland_i",
+        "count": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "100"
+      },
+      "requires": [
+        "q_first_sugar"
+      ],
+      "desc": "酶是催化流的燃料。造一座酶腺，然后把它接到糖化腔上游。",
+      "hint": "酶腺 I 需要累计 60 糖才会解锁（左侧列表里会变亮）。它产酶，而酶是后面所有高级节点的通货。"
+    },
+    {
+      "id": "q_first_upgrade",
+      "name": "进化一步",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "upgrades",
+        "value": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "100"
+      },
+      "requires": [
+        "q_expand_10"
+      ],
+      "desc": "购买你的第一个升级。",
+      "hint": "右侧面板点一条买得起的升级。升级是成本递增的，别一口气全买同一条。"
+    },
+    {
+      "id": "q_bruteforce",
+      "name": "规模化",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "1000"
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "enzyme",
+        "amount": "20"
+      },
+      "requires": [
+        "q_first_upgrade"
+      ],
+      "desc": "累计产出 1000 糖。你已经理解了核心循环。",
+      "hint": "累计产出 1000 糖。到这一步你已经理解了核心循环 —— 接下来是第一次真正的扩张。"
+    },
+    {
+      "id": "q_choose_strain",
+      "name": "你是什么菌",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "strainsUsed",
+        "value": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "600"
+      },
+      "requires": [
+        "q_bruteforce"
+      ],
+      "desc": "同一个网络，换一种活法。",
+      "hint": "底部导航「孢子」面板里有 6 种菌株，其中两种开局就能用：腐生（采集 +60%，但土壤枯竭 ×2.2）与共生（共生类 +45%、离线更强，手动更弱）。表达菌株不重置任何东西，只改写规则。"
+    },
+    {
+      "id": "q_enzyme_flood",
+      "name": "酶的洪流",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "buildNode",
+        "node": "enzyme_gland_ii",
+        "count": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "500"
+      },
+      "requires": [
+        "q_bruteforce"
+      ],
+      "desc": "酶腺 I 每小时只挤出一点点。你需要的是洪水。",
+      "hint": "酶腺 II 需要累计产出 40 酶才会解锁（左侧列表里变亮）。它的产出是 I 的 12 倍 —— 先把酶腺 I 铺几个，等酶爬到 40。"
+    },
+    {
+      "id": "q_sclerotium",
+      "name": "不可再生",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "buildNode",
+        "node": "sclerotium_press",
+        "count": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "800"
+      },
+      "requires": [
+        "q_enzyme_flood"
+      ],
+      "desc": "你第一次产出\"不可再生\"的东西。",
+      "hint": "菌核压机需要累计产出 500 酶才会解锁 —— 这是全局最长的一次等待。把酶腺 II 铺满一层（矿脉层 ×12 更划算），别停在这里干等。"
+    },
+    {
+      "id": "q_core_chamber",
+      "name": "会思考的核",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "buildNode",
+        "node": "core_chamber",
+        "count": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "sclerotium",
+        "amount": "20"
+      },
+      "requires": [
+        "q_sclerotium"
+      ],
+      "desc": "晶格与电流在健康土壤上交汇的地方。",
+      "hint": "核心腔需要累计产出 5 菌核晶格才会解锁。它的造价里还要 10 晶格与 200 酶 —— 先把压机铺够，再攒一次。"
+    },
+    {
+      "id": "q_layer2",
+      "name": "向下",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "layer",
+        "layer": "aquifer"
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "200"
+      },
+      "requires": [
+        "q_bruteforce"
+      ],
+      "desc": "含水层在等着你。那里有水，还有光。",
+      "hint": "含水层需要累计产出 400 水才解锁。多铺几个吸水菌丝，然后等。含水层的产出是表土层的 3 倍。"
+    },
+    {
+      "id": "q_first_tech",
+      "name": "思考",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "techs",
+        "value": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "300"
+      },
+      "requires": [
+        "q_bruteforce"
+      ],
+      "desc": "解锁你的第一个科技。从自动化开始会舒服一点。",
+      "hint": "科技树在底部导航的「进度」里。第一个科技建议选科技树「自动化」分支的「自动购买 I」—— 它替你买升级。"
+    },
+    {
+      "id": "q_core_ready",
+      "name": "孢子化的门票",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "resource",
+        "res": "core",
+        "amount": "1"
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "prestige_hint",
+        "desc": "解锁孢子化界面引导"
+      },
+      "requires": [
+        "q_core_chamber"
+      ],
+      "desc": "共生核心是孢子化的门槛。它的前置：晶格、电信号，以及一块健康的土壤。",
+      "hint": "核心腔每 50 秒产 1 个共生核心。建好之后等着就行 —— 拿到 1 个核心，孢子化的大门就开了。"
+    },
+    {
+      "id": "q_try_challenge",
+      "name": "换一套规则",
+      "cat": "tutorial",
+      "goal": {
+        "kind": "challengesDone",
+        "value": 1
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "gene",
+        "amount": "50"
+      },
+      "requires": [
+        "q_choose_strain"
+      ],
+      "desc": "有一类玩法，规则本来就是用来被改写的。",
+      "hint": "底部导航「挑战」里有 30 条\"改写规则\"型的短局：禁用某个节点类、把配方输入输出对调、让矩阵每秒被打乱…… 现在还不必打，但可以去看看它们长什么样。"
+    },
+    {
+      "id": "q_daily_harvest",
+      "name": "今日收获",
+      "cat": "daily",
+      "goal": {
+        "kind": "resource",
+        "res": "humus",
+        "amount": "1000000"
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "honeydew",
+        "amount": "500"
+      },
+      "requires": [],
+      "desc": "今天产出 100 万腐殖质。"
+    },
+    {
+      "id": "q_daily_sell",
+      "name": "今日交易",
+      "cat": "daily",
+      "goal": {
+        "kind": "market",
+        "value": "sell_1000"
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "honeydew",
+        "amount": "800"
+      },
+      "requires": [],
+      "desc": "在菌市卖出 1000 单位任意资源（在价格高于基准时卖出有额外奖励）。"
+    },
+    {
+      "id": "q_daily_event",
+      "name": "今日应对",
+      "cat": "daily",
+      "goal": {
+        "kind": "events",
+        "value": 3
+      },
+      "requires": [],
+      "reward": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "50000"
+      },
+      "desc": "处理 3 个负面事件（任何缓解手段都算）。"
+    },
+    {
+      "id": "q_daily_crit",
+      "name": "今日暴击",
+      "cat": "daily",
+      "goal": {
+        "kind": "crits",
+        "value": 10
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "5000"
+      },
+      "requires": [],
+      "desc": "触发 10 次出芽暴击。"
+    },
+    {
+      "id": "q_daily_combo",
+      "name": "今日节奏",
+      "cat": "daily",
+      "goal": {
+        "kind": "combo",
+        "value": 20
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "80000"
+      },
+      "requires": [],
+      "desc": "达到 20 连击。"
+    },
+    {
+      "id": "q_daily_build",
+      "name": "今日建造",
+      "cat": "daily",
+      "goal": {
+        "kind": "buildAny",
+        "value": 10
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "8000"
+      },
+      "requires": [],
+      "desc": "建造 10 个节点。"
+    },
+    {
+      "id": "q_daily_upgrade",
+      "name": "今日强化",
+      "cat": "daily",
+      "goal": {
+        "kind": "upgrades",
+        "value": 5
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "enzyme",
+        "amount": "500"
+      },
+      "requires": [],
+      "desc": "购买 5 个升级。"
+    },
+    {
+      "id": "q_daily_pact",
+      "name": "今日履约",
+      "cat": "daily",
+      "goal": {
+        "kind": "pactDeliveries",
+        "value": 3
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "pact",
+        "amount": "20"
+      },
+      "requires": [],
+      "desc": "完成 3 次契约交付。"
+    },
+    {
+      "id": "q_daily_repair",
+      "name": "今日修复",
+      "cat": "daily",
+      "goal": {
+        "kind": "tilesRepaired",
+        "value": 5
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "humus",
+        "amount": "100000"
+      },
+      "requires": [],
+      "desc": "修复 5 块土地（富饶度回到 80% 以上）。"
+    },
+    {
+      "id": "q_daily_spore",
+      "name": "今日播种",
+      "cat": "daily",
+      "goal": {
+        "kind": "resource",
+        "res": "spore",
+        "amount": "10000"
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "120000"
+      },
+      "requires": [],
+      "desc": "今天产出 1 万孢子。"
+    },
+    {
+      "id": "q_long_100_nodes",
+      "name": "百链",
+      "cat": "longterm",
+      "goal": {
+        "kind": "nodes",
+        "value": 100
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.05,
+        "desc": "全局产出 +5%"
+      },
+      "requires": [],
+      "desc": "让网络拥有 100 个节点。"
+    },
+    {
+      "id": "q_long_deep",
+      "name": "抵达岩层",
+      "cat": "longterm",
+      "goal": {
+        "kind": "layer",
+        "layer": "bedrock"
+      },
+      "reward": {
+        "kind": "resource",
+        "res": "sclerotium",
+        "amount": "10"
+      },
+      "requires": [],
+      "desc": "向下到岩层。电信号只在那里能传得动。"
+    },
+    {
+      "id": "q_long_core_10",
+      "name": "十颗心",
+      "cat": "longterm",
+      "goal": {
+        "kind": "resource",
+        "res": "core",
+        "amount": "10"
+      },
+      "reward": {
+        "kind": "prestigeGain",
+        "value": 0.05,
+        "desc": "孢子化收益 +5%"
+      },
+      "requires": [],
+      "desc": "累积 10 个共生核心。"
+    },
+    {
+      "id": "q_long_signal",
+      "name": "会思考的网络",
+      "cat": "longterm",
+      "goal": {
+        "kind": "resource",
+        "res": "signal",
+        "amount": "100"
+      },
+      "reward": {
+        "kind": "ruleSlot",
+        "value": 1,
+        "desc": "规则槽 +1"
+      },
+      "requires": [],
+      "desc": "累积 100 电信号。你开始有自己的想法。"
+    },
+    {
+      "id": "q_long_prestige_10",
+      "name": "十代",
+      "cat": "longterm",
+      "goal": {
+        "kind": "prestige",
+        "value": 10
+      },
+      "requires": [],
+      "reward": {
+        "kind": "resource",
+        "res": "sporogene",
+        "amount": "50"
+      },
+      "desc": "完成 10 次孢子化。"
+    },
+    {
+      "id": "q_long_strain",
+      "name": "成为自己",
+      "cat": "longterm",
+      "goal": {
+        "kind": "strainsUsed",
+        "value": 1
+      },
+      "reward": {
+        "kind": "unlock",
+        "value": "strain_swap_hint",
+        "desc": "解锁菌株切换引导"
+      },
+      "requires": [
+        "q_long_prestige_10"
+      ],
+      "desc": "表达出你的第一种菌株。"
+    },
+    {
+      "id": "q_long_auto",
+      "name": "让网络自己动",
+      "cat": "longterm",
+      "goal": {
+        "kind": "autoTier",
+        "value": 4
+      },
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.05,
+        "desc": "全局产出 +5%"
+      },
+      "requires": [],
+      "desc": "解锁到 4 级自动化（自动优化）。"
+    },
+    {
+      "id": "q_long_rules",
+      "name": "生产 AI",
+      "cat": "longterm",
+      "goal": {
+        "kind": "rules",
+        "value": 5
+      },
+      "requires": [],
+      "reward": {
+        "kind": "ruleSlot",
+        "value": 1,
+        "desc": "规则槽 +1"
+      },
+      "desc": "同时维护 5 条 IF/THEN 规则。"
+    },
+    {
+      "id": "q_long_deepmass",
+      "name": "上古的残骸",
+      "cat": "longterm",
+      "goal": {
+        "kind": "resource",
+        "res": "deepmass",
+        "amount": "1000"
+      },
+      "requires": [],
+      "reward": {
+        "kind": "unlock",
+        "value": "deepmass_lore",
+        "desc": "解锁深菌质图鉴全文"
+      },
+      "desc": "累积 1000 深菌质。"
+    },
+    {
+      "id": "q_long_law",
+      "name": "第一条法则",
+      "cat": "longterm",
+      "goal": {
+        "kind": "resource",
+        "res": "law",
+        "amount": "1"
+      },
+      "requires": [],
+      "reward": {
+        "kind": "prestigeGain",
+        "value": 0.1,
+        "desc": "孢子化收益 +10%"
+      },
+      "desc": "获得 1 条生态法则碎片。从此刻起你能改写规则。"
+    },
+    {
+      "id": "q_long_species",
+      "name": "五位邻居",
+      "cat": "longterm",
+      "goal": {
+        "kind": "contracts",
+        "value": 5
+      },
+      "requires": [],
+      "reward": {
+        "kind": "resource",
+        "res": "honeydew",
+        "amount": "50000"
+      },
+      "desc": "同时与 5 个物种保持契约。"
+    },
+    {
+      "id": "q_long_seasons",
+      "name": "见证四季",
+      "cat": "longterm",
+      "goal": {
+        "kind": "seasonCycles",
+        "value": 4
+      },
+      "requires": [],
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.06,
+        "desc": "全局产出 +6%"
+      },
+      "desc": "经历完整的四季轮转。"
+    },
+    {
+      "id": "q_hid_poor",
+      "name": "在最贫瘠的地方",
+      "cat": "hidden",
+      "goal": {
+        "kind": "poorSurvival",
+        "value": 600
+      },
+      "requires": [],
+      "reward": {
+        "kind": "unlock",
+        "value": "hidden_eye_hint",
+        "desc": "解锁『腐殖之眼』线索"
+      },
+      "desc": "在一个富饶度低于 5% 的地块上连续工作 10 分钟。"
+    },
+    {
+      "id": "q_hid_silent",
+      "name": "不说一句话",
+      "cat": "hidden",
+      "goal": {
+        "kind": "noPactTime",
+        "value": 7200
+      },
+      "requires": [],
+      "reward": {
+        "kind": "unlock",
+        "value": "silent_pact_hint",
+        "desc": "解锁『沉默协议』线索"
+      },
+      "desc": "连续 2 小时不签订任何契约。"
+    },
+    {
+      "id": "q_hid_cycle",
+      "name": "咬住自己的尾巴",
+      "cat": "hidden",
+      "goal": {
+        "kind": "cycles",
+        "value": 1
+      },
+      "requires": [],
+      "reward": {
+        "kind": "unlock",
+        "value": "cycle_bonus_hint",
+        "desc": "解锁环路加成说明"
+      },
+      "desc": "让网络中第一次出现环。"
+    },
+    {
+      "id": "q_hid_void",
+      "name": "不该存在的东西",
+      "cat": "hidden",
+      "goal": {
+        "kind": "resource",
+        "res": "voidspore",
+        "amount": "1"
+      },
+      "requires": [],
+      "reward": {
+        "kind": "unlock",
+        "value": "void_layer",
+        "desc": "解锁虚空菌床"
+      },
+      "desc": "触发虚空孢子的三条线索中的任意两条。"
+    },
+    {
+      "id": "q_hid_echo",
+      "name": "另一条时间线",
+      "cat": "hidden",
+      "goal": {
+        "kind": "resource",
+        "res": "echo",
+        "amount": "1"
+      },
+      "requires": [],
+      "reward": {
+        "kind": "unlock",
+        "value": "echo_system",
+        "desc": "解锁共生回声系统"
+      },
+      "desc": "完成一条事件链。"
+    },
+    {
+      "id": "q_hid_noclick",
+      "name": "静止",
+      "cat": "hidden",
+      "goal": {
+        "kind": "idleNoClick",
+        "value": 600
+      },
+      "requires": [],
+      "reward": {
+        "kind": "resource",
+        "res": "sugar",
+        "amount": "100000"
+      },
+      "desc": "连续 10 分钟不进行任何手动操作。"
+    },
+    {
+      "id": "q_hid_crash",
+      "name": "崩盘中的买家",
+      "cat": "hidden",
+      "goal": {
+        "kind": "market",
+        "value": "crash_buy"
+      },
+      "requires": [],
+      "reward": {
+        "kind": "resource",
+        "res": "honeydew",
+        "amount": "20000"
+      },
+      "desc": "在价格跌破基准 40% 时买入 1 万单位。"
+    },
+    {
+      "id": "q_hid_reverse",
+      "name": "倒流",
+      "cat": "hidden",
+      "goal": {
+        "kind": "reverseRecipe",
+        "value": 1
+      },
+      "requires": [],
+      "reward": {
+        "kind": "unlock",
+        "value": "entropy_reverse_hint",
+        "desc": "解锁逆熵生产线索"
+      },
+      "desc": "让一条配方反向运行一次。"
+    },
+    {
+      "id": "q_meta_challenge_3",
+      "name": "规则破坏者",
+      "cat": "meta",
+      "goal": {
+        "kind": "challengesDone",
+        "value": 3
+      },
+      "requires": [],
+      "reward": {
+        "kind": "prestigeGain",
+        "value": 0.1,
+        "desc": "孢子化收益 +10%"
+      },
+      "desc": "完成 3 个挑战。"
+    },
+    {
+      "id": "q_meta_branches",
+      "name": "全面发展",
+      "cat": "meta",
+      "goal": {
+        "kind": "branchTechs",
+        "value": 3
+      },
+      "requires": [],
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.08,
+        "desc": "全局产出 +8%"
+      },
+      "desc": "在全部 6 个科技分支中，每个分支至少解锁 3 个科技。"
+    },
+    {
+      "id": "q_meta_strain_all",
+      "name": "六种人生",
+      "cat": "meta",
+      "goal": {
+        "kind": "strainsUsed",
+        "value": 6
+      },
+      "requires": [],
+      "reward": {
+        "kind": "prestigeGain",
+        "value": 0.2,
+        "desc": "孢子化收益 +20%"
+      },
+      "desc": "使用过全部 6 种菌株。"
+    },
+    {
+      "id": "q_meta_p3",
+      "name": "虫巢",
+      "cat": "meta",
+      "goal": {
+        "kind": "prestigeLevel",
+        "value": 3
+      },
+      "requires": [
+        "q_long_strain"
+      ],
+      "reward": {
+        "kind": "unlock",
+        "value": "hive_hub",
+        "desc": "解锁虫巢枢纽"
+      },
+      "desc": "达到第三层 Prestige，让网络拥有一个中心。"
+    },
+    {
+      "id": "q_meta_p4",
+      "name": "行星共生",
+      "cat": "meta",
+      "goal": {
+        "kind": "prestigeLevel",
+        "value": 4
+      },
+      "requires": [
+        "q_meta_p3"
+      ],
+      "reward": {
+        "kind": "unlock",
+        "value": "seasons",
+        "desc": "解锁季节系统"
+      },
+      "desc": "达到第四层 Prestige，开始改写全局规则。"
+    },
+    {
+      "id": "q_meta_achievements_60",
+      "name": "徽章收藏家",
+      "cat": "meta",
+      "goal": {
+        "kind": "achievements",
+        "value": 60
+      },
+      "requires": [],
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.05,
+        "desc": "全局产出 +5%"
+      },
+      "desc": "解锁 60 个成就。"
+    },
+    {
+      "id": "q_meta_1000_nodes",
+      "name": "行星之网",
+      "cat": "meta",
+      "goal": {
+        "kind": "nodes",
+        "value": 1000
+      },
+      "requires": [],
+      "reward": {
+        "kind": "outputMul",
+        "value": 0.1,
+        "desc": "全局产出 +10%"
+      },
+      "desc": "网络拥有 1000 个节点。"
+    },
+    {
+      "id": "q_meta_panspermia",
+      "name": "播种者",
+      "cat": "meta",
+      "goal": {
+        "kind": "challenge",
+        "value": "ch_final"
+      },
+      "requires": [
+        "q_meta_p4"
+      ],
+      "reward": {
+        "kind": "unlock",
+        "value": "panspermia",
+        "desc": "解锁星际播种（终局）"
+      },
+      "desc": "完成『星尘之种』挑战，把孢子射向另一颗星球。"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "appId": "com.mycelia.game",
+  "appName": "共生之网",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  },
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 800,
+      "backgroundColor": "#0b0d10",
+      "showSpinner": false
+    }
+  }
+}

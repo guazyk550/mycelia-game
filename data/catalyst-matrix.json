@@ -1,0 +1,143 @@
+{
+  "tableVersion": 1,
+  "evaluation": {
+    "keyFormula": "catalystTagOf(upstreamNode) × classOf(downstreamNode)",
+    "formula": "catalystMul = max(rateMul of matching in-links) × min(1 + 0.02 × (inDegree - 1), 1.2)",
+    "enzymeMul": "1 - enzymeDiscount（对下游节点的 enzymePerSec 生效，多条入边取最小折扣）",
+    "stabilityAdd": "stability 累加，用于抵消负面事件强度（0–1，上限 0.6）",
+    "fallback": "先精确匹配 (upstreamTag, downstreamClass)，再匹配 (upstreamTag, \"*\")，最后 default",
+    "notes": [
+      "连线不只是管道：上游节点的 catalystTag 决定下游配方被如何催化。",
+      "同样的节点集合，连线方式不同，产出可差 3–10 倍——这是拓扑流的核心收益来源。",
+      "入边数量有边际收益（每多一条 +2%，上限 +20%），鼓励多源供给而不是单链堆叠。"
+    ]
+  },
+  "default": {
+    "rateMul": 1.0,
+    "enzymeDiscount": 0.0,
+    "stability": 0.0,
+    "note": "无催化关系。资源照常流动，但没有任何增效。"
+  },
+  "rules": [
+    {
+      "upstreamTag": "fresh", "downstreamClass": "metabolizer", "rateMul": 1.15, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "新鲜原料直达：腐殖质还带着温度就被水解，产能 +15%。"
+    },
+    {
+      "upstreamTag": "fresh", "downstreamClass": "sporifier", "rateMul": 1.10, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "新鲜基质养出的孢子更饱满，孢子产能 +10%。"
+    },
+    {
+      "upstreamTag": "fresh", "downstreamClass": "extractor", "rateMul": 0.90, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "两个采掘节点接在一起会争抢同一块土地，产能 −10%。"
+    },
+    {
+      "upstreamTag": "ionic", "downstreamClass": "metabolizer", "rateMul": 1.10, "enzymeDiscount": 0.05, "stability": 0.0,
+      "note": "矿物离子做辅因子：多数酶反应加速 10%，酶耗 −5%。"
+    },
+    {
+      "upstreamTag": "ionic", "downstreamClass": "special", "rateMul": 1.20, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "晶格与核心本质上是被压实的矿物离子：产能 +20%。"
+    },
+    {
+      "upstreamTag": "ionic", "downstreamClass": "symbiont", "rateMul": 0.85, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "盐胁迫：矿物离子直接供给共生体会毒害藻类，产能 −15%。"
+    },
+    {
+      "upstreamTag": "hydraulic", "downstreamClass": "*", "rateMul": 1.05, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "溶剂充足：所有依赖水的配方产能 +5%。"
+    },
+    {
+      "upstreamTag": "hydraulic", "downstreamClass": "metabolizer", "rateMul": 1.08, "enzymeDiscount": 0.05, "stability": 0.0,
+      "note": "稀释效应让水解更彻底：产能 +8%，酶耗 −5%。"
+    },
+    {
+      "upstreamTag": "luminous", "downstreamClass": "symbiont", "rateMul": 1.25, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "光合增效：感光菌帽直连共生体，糖与蜜露产能 +25%。"
+    },
+    {
+      "upstreamTag": "luminous", "downstreamClass": "metabolizer", "rateMul": 1.05, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "光照促进酶表达：产能 +5%。"
+    },
+    {
+      "upstreamTag": "cascade", "downstreamClass": "metabolizer", "rateMul": 1.00, "enzymeDiscount": 0.15, "stability": 0.0,
+      "note": "酶级联：上游的酶被下游直接再利用，酶耗 −15%。级联越长，这条收益越关键。"
+    },
+    {
+      "upstreamTag": "cascade", "downstreamClass": "special", "rateMul": 1.15, "enzymeDiscount": 0.10, "stability": 0.0,
+      "note": "精密催化：晶格压缩与核心合成产能 +15%，酶耗 −10%。"
+    },
+    {
+      "upstreamTag": "cascade", "downstreamClass": "sporifier", "rateMul": 1.12, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "酶处理过的糖更易被孢子利用：产能 +12%。"
+    },
+    {
+      "upstreamTag": "cascade", "downstreamClass": "transmitter", "rateMul": 0.95, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "酶会降解信息素分子：信号类产能 −5%。别把酶腺接在信息素腺上。"
+    },
+    {
+      "upstreamTag": "cascade", "downstreamClass": "meta", "rateMul": 1.10, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "催化辅助的星尘筛选：产能 +10%。"
+    },
+    {
+      "upstreamTag": "volatile", "downstreamClass": "metabolizer", "rateMul": 0.85, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "毒素污染：任何接在毒素腺下游的代谢节点产能 −15%。"
+    },
+    {
+      "upstreamTag": "volatile", "downstreamClass": "symbiont", "rateMul": 0.75, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "毒杀共生体：藻类与契约巢产能 −25%。寄生流的代价之一。"
+    },
+    {
+      "upstreamTag": "volatile", "downstreamClass": "extractor", "rateMul": 0.95, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "土壤酸化影响相邻采掘节点：产能 −5%。"
+    },
+    {
+      "upstreamTag": "volatile", "downstreamClass": "special", "rateMul": 1.10, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "毒素蚀刻：晶格刻蚀与深钻产能 +10%。"
+    },
+    {
+      "upstreamTag": "prolific", "downstreamClass": "sporifier", "rateMul": 0.85, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "孢子竞争：两个繁殖节点相邻时产能 −15%。"
+    },
+    {
+      "upstreamTag": "prolific", "downstreamClass": "symbiont", "rateMul": 1.06, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "孢子定殖帮助共生体附着：产能 +6%。"
+    },
+    {
+      "upstreamTag": "symbiotic", "downstreamClass": "*", "rateMul": 1.05, "enzymeDiscount": 0.0, "stability": 0.15,
+      "note": "共生稳定场：下游全类产能 +5%，且负面事件强度 −15%。"
+    },
+    {
+      "upstreamTag": "symbiotic", "downstreamClass": "special", "rateMul": 1.10, "enzymeDiscount": 0.0, "stability": 0.15,
+      "note": "共生共赢：核心腔与菌核压机产能 +10%，抗扰动 +15%。"
+    },
+    {
+      "upstreamTag": "neural", "downstreamClass": "special", "rateMul": 1.30, "enzymeDiscount": 0.0, "stability": 0.10,
+      "note": "信息协调：受电信号协调的高级结构产能 +30%。全游戏最高的单条催化倍率。"
+    },
+    {
+      "upstreamTag": "neural", "downstreamClass": "metabolizer", "rateMul": 1.08, "enzymeDiscount": 0.05, "stability": 0.05,
+      "note": "协同生产：信息素腺下游的代谢节点产能 +8%。"
+    },
+    {
+      "upstreamTag": "neural", "downstreamClass": "extractor", "rateMul": 1.05, "enzymeDiscount": 0.0, "stability": 0.05,
+      "note": "采集调度：电信号协调下的采掘节点产能 +5%。"
+    },
+    {
+      "upstreamTag": "neural", "downstreamClass": "transmitter", "rateMul": 1.10, "enzymeDiscount": 0.0, "stability": 0.05,
+      "note": "信号中继：中继下游的信号节点产能 +10%。"
+    },
+    {
+      "upstreamTag": "deep", "downstreamClass": "special", "rateMul": 1.10, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "深层结构互相加固：高级节点产能 +10%。"
+    },
+    {
+      "upstreamTag": "deep", "downstreamClass": "meta", "rateMul": 1.20, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "深菌质是星尘筛选的原料：Meta 产能 +20%。"
+    },
+    {
+      "upstreamTag": "meta", "downstreamClass": "meta", "rateMul": 1.15, "enzymeDiscount": 0.0, "stability": 0.0,
+      "note": "法则之间的共鸣：Meta 节点产能 +15%。"
+    }
+  ]
+}

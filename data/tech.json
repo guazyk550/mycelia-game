@@ -1,0 +1,1452 @@
+{
+  "tableVersion": 1,
+  "branches": [
+    {
+      "id": "auto",
+      "name": "自动化",
+      "color": "#38bdf8",
+      "desc": "让网络自己行动。从自动采集到 IF/THEN 规则引擎，玩家最终编写自己的生产 AI。"
+    },
+    {
+      "id": "substrate",
+      "name": "基质",
+      "color": "#8a6d3b",
+      "desc": "土壤是有限的。这一支决定你是抽干它，还是与它共存。"
+    },
+    {
+      "id": "catalysis",
+      "name": "催化",
+      "color": "#6fcf97",
+      "desc": "把拓扑的收益推到极限：矩阵强化、多阶催化、自催化回路。"
+    },
+    {
+      "id": "symbiosis",
+      "name": "共生",
+      "color": "#fbbf24",
+      "desc": "外交与贸易。契约越精细，维兰人给得越多——也越依赖你。"
+    },
+    {
+      "id": "time",
+      "name": "时间",
+      "color": "#a78bfa",
+      "desc": "压缩、储存、折叠、回溯。时间是唯一不能被生产的资源。"
+    },
+    {
+      "id": "forbidden",
+      "name": "禁忌",
+      "color": "#fb7185",
+      "desc": "改写规则本身的科技。它们不便宜，而且每条都有代价。"
+    }
+  ],
+  "techs": [
+    {
+      "id": "tech_auto_1",
+      "name": "自动购买 I",
+      "branch": "auto",
+      "tier": 1,
+      "cost": {
+        "sugar": "500"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "autoTier",
+        "value": 1
+      },
+      "desc": "网络自己买升级：每秒检查一次，买下性价比最高的那条。你不再需要一直盯着右侧列表。"
+    },
+    {
+      "id": "tech_auto_2",
+      "name": "自动购买 II",
+      "branch": "auto",
+      "tier": 2,
+      "cost": {
+        "sugar": "5000",
+        "spore": "2000"
+      },
+      "requires": [
+        "tech_auto_1"
+      ],
+      "effect": {
+        "kind": "buildCostDiscount",
+        "value": 0.06
+      },
+      "desc": "自动购买会优先挑\"买完立刻能回本\"的升级，并且建造成本 −6%。"
+    },
+    {
+      "id": "tech_auto_3",
+      "name": "自动扩建 I",
+      "branch": "auto",
+      "tier": 3,
+      "cost": {
+        "sugar": "20000",
+        "enzyme": "50"
+      },
+      "requires": [
+        "tech_auto_2"
+      ],
+      "effect": {
+        "kind": "autoTier",
+        "value": 2
+      },
+      "desc": "网络自己找瓶颈：缺什么补什么。新建的节点**还不会接线** —— 那是下一级的事。"
+    },
+    {
+      "id": "tech_auto_4",
+      "name": "自动扩建 II",
+      "branch": "auto",
+      "tier": 3,
+      "cost": {
+        "honeydew": "2000",
+        "sclerotium": "2"
+      },
+      "requires": [
+        "tech_auto_3"
+      ],
+      "effect": {
+        "kind": "outputMul",
+        "value": 0.12
+      },
+      "desc": "扩建时优先挑能补上最短缺资源的节点，全局产出 +12%。"
+    },
+    {
+      "id": "tech_auto_5",
+      "name": "自动连线 I",
+      "branch": "auto",
+      "tier": 4,
+      "cost": {
+        "pheromone": "500",
+        "enzyme": "500"
+      },
+      "requires": [
+        "tech_auto_4"
+      ],
+      "effect": {
+        "kind": "autoTier",
+        "value": 3
+      },
+      "desc": "网络自己拉线：把孤立节点接到产出与催化都最合适的上游。产量会明显跳一档。"
+    },
+    {
+      "id": "tech_auto_6",
+      "name": "自动连线 II",
+      "branch": "auto",
+      "tier": 4,
+      "cost": {
+        "pheromone": "3000"
+      },
+      "requires": [
+        "tech_auto_5"
+      ],
+      "effect": {
+        "kind": "linkFlux",
+        "value": 0.2
+      },
+      "desc": "连线时同时考虑通量与催化匹配，所有连线通量 +20%。"
+    },
+    {
+      "id": "tech_auto_7",
+      "name": "自动优化 I",
+      "branch": "auto",
+      "tier": 5,
+      "cost": {
+        "pheromone": "10000",
+        "signal": "20"
+      },
+      "requires": [
+        "tech_auto_6"
+      ],
+      "effect": {
+        "kind": "autoTier",
+        "value": 4
+      },
+      "desc": "网络自己调拓扑：每秒重连一个节点，换到催化更高的上游。"
+    },
+    {
+      "id": "tech_auto_8",
+      "name": "自动优化 II",
+      "branch": "auto",
+      "tier": 5,
+      "cost": {
+        "signal": "100",
+        "sclerotium": "40"
+      },
+      "requires": [
+        "tech_auto_7"
+      ],
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.08
+      },
+      "desc": "优化范围扩大到全图的次优节点，全局催化 +8%。"
+    },
+    {
+      "id": "tech_auto_9",
+      "name": "自动孢子化",
+      "branch": "auto",
+      "tier": 6,
+      "cost": {
+        "sporogene": "200",
+        "core": "5"
+      },
+      "requires": [
+        "tech_auto_8"
+      ],
+      "effect": {
+        "kind": "autoTier",
+        "value": 5
+      },
+      "desc": "达到设定阈值时自动孢子化。阈值在自动化面板里调。"
+    },
+    {
+      "id": "tech_auto_10",
+      "name": "规则引擎 I",
+      "branch": "auto",
+      "tier": 7,
+      "cost": {
+        "pheromone": "30000",
+        "signal": "200"
+      },
+      "requires": [
+        "tech_auto_9"
+      ],
+      "effect": {
+        "kind": "ruleSlot",
+        "value": 3
+      },
+      "desc": "解锁 IF/THEN 规则编辑器：把你的判断写成规则，网络替你执行。获得 3 个槽位。"
+    },
+    {
+      "id": "tech_auto_11",
+      "name": "规则引擎 II",
+      "branch": "auto",
+      "tier": 7,
+      "cost": {
+        "pheromone": "120000",
+        "signal": "600"
+      },
+      "requires": [
+        "tech_auto_10"
+      ],
+      "effect": {
+        "kind": "ruleSlot",
+        "value": 2
+      },
+      "desc": "规则槽 +2，条件支持 AND / OR 组合。"
+    },
+    {
+      "id": "tech_auto_12",
+      "name": "规则引擎 III",
+      "branch": "auto",
+      "tier": 8,
+      "cost": {
+        "signal": "3000",
+        "core": "40"
+      },
+      "requires": [
+        "tech_auto_11"
+      ],
+      "effect": {
+        "kind": "ruleSlot",
+        "value": 2
+      },
+      "desc": "规则可排序：同时满足条件时，按你定义的顺序执行。"
+    },
+    {
+      "id": "tech_auto_13",
+      "name": "规则分片",
+      "branch": "auto",
+      "tier": 8,
+      "cost": {
+        "signal": "12000",
+        "sclerotium": "300"
+      },
+      "requires": [
+        "tech_auto_12"
+      ],
+      "effect": {
+        "kind": "outputMul",
+        "value": 0.15
+      },
+      "desc": "规则并行求值（每 tick 全部检查），全局产出 +15%。"
+    },
+    {
+      "id": "tech_auto_14",
+      "name": "全自动意识",
+      "branch": "auto",
+      "tier": 9,
+      "cost": {
+        "law": "2",
+        "core": "200"
+      },
+      "requires": [
+        "tech_auto_13"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "full_auto"
+      },
+      "desc": "规则引擎可以响应事件与市场，网络开始独立做决定。你只是观众。"
+    },
+    {
+      "id": "tech_sub_1",
+      "name": "深层渗透 I",
+      "branch": "substrate",
+      "tier": 2,
+      "cost": {
+        "spore": "2000",
+        "water": "1500"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "buildCostDiscount",
+        "value": 0.1
+      },
+      "desc": "含水层接入成本 −30%（含建造折扣叠加）。"
+    },
+    {
+      "id": "tech_sub_2",
+      "name": "深层渗透 II",
+      "branch": "substrate",
+      "tier": 4,
+      "cost": {
+        "mineral": "8000",
+        "enzyme": "200"
+      },
+      "requires": [
+        "tech_sub_1"
+      ],
+      "effect": {
+        "kind": "buildCostDiscount",
+        "value": 0.1
+      },
+      "desc": "矿脉层与岩层接入成本 −30%。"
+    },
+    {
+      "id": "tech_sub_3",
+      "name": "枯竭免疫 I",
+      "branch": "substrate",
+      "tier": 3,
+      "cost": {
+        "humus": "20000",
+        "toxin": "200"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "depletionReduce",
+        "value": 0.25
+      },
+      "desc": "所有采掘对土壤伤害 −25%。"
+    },
+    {
+      "id": "tech_sub_4",
+      "name": "枯竭免疫 II",
+      "branch": "substrate",
+      "tier": 5,
+      "cost": {
+        "sclerotium": "20",
+        "gene": "10"
+      },
+      "requires": [
+        "tech_sub_3"
+      ],
+      "effect": {
+        "kind": "depletionReduce",
+        "value": 0.5
+      },
+      "desc": "再 −50%（与 I 叠乘）。"
+    },
+    {
+      "id": "tech_sub_5",
+      "name": "菌丝再生 I",
+      "branch": "substrate",
+      "tier": 4,
+      "cost": {
+        "sugar": "50000",
+        "water": "30000"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "richnessRepair",
+        "value": 0.15
+      },
+      "desc": "所有地块每秒修复 +0.15 富饶度。"
+    },
+    {
+      "id": "tech_sub_6",
+      "name": "菌丝再生 II",
+      "branch": "substrate",
+      "tier": 6,
+      "cost": {
+        "sclerotium": "60",
+        "core": "10"
+      },
+      "requires": [
+        "tech_sub_5"
+      ],
+      "effect": {
+        "kind": "richnessRepair",
+        "value": 0.35
+      },
+      "desc": "修复速度翻倍以上，配合枯竭免疫可实现永续采掘。"
+    },
+    {
+      "id": "tech_sub_7",
+      "name": "基质跳跃",
+      "branch": "substrate",
+      "tier": 5,
+      "cost": {
+        "signal": "50",
+        "sclerotium": "30"
+      },
+      "requires": [
+        "tech_sub_2"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "cross_layer_link"
+      },
+      "desc": "允许跨基质层连线（长距离但通量减半）。"
+    },
+    {
+      "id": "tech_sub_8",
+      "name": "富饶上限",
+      "branch": "substrate",
+      "tier": 5,
+      "cost": {
+        "honeydew": "50000",
+        "gene": "20"
+      },
+      "requires": [
+        "tech_sub_5"
+      ],
+      "effect": {
+        "kind": "richnessCap",
+        "value": 0.2
+      },
+      "desc": "所有地块富饶度上限 +20%。"
+    },
+    {
+      "id": "tech_sub_9",
+      "name": "矿脉共振",
+      "branch": "substrate",
+      "tier": 4,
+      "cost": {
+        "mineral": "20000",
+        "enzyme": "500"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "outputMul",
+        "res": "mineral",
+        "value": 0.5
+      },
+      "desc": "矿质产出 +50%。"
+    },
+    {
+      "id": "tech_sub_10",
+      "name": "岩层适应",
+      "branch": "substrate",
+      "tier": 6,
+      "cost": {
+        "sclerotium": "100",
+        "signal": "100"
+      },
+      "requires": [
+        "tech_sub_2"
+      ],
+      "effect": {
+        "kind": "outputMul",
+        "class": "extractor",
+        "value": 0.25
+      },
+      "desc": "岩层以下采掘节点产出 +25%。"
+    },
+    {
+      "id": "tech_sub_11",
+      "name": "地幔共生",
+      "branch": "substrate",
+      "tier": 7,
+      "cost": {
+        "core": "30",
+        "deepmass": "2000"
+      },
+      "requires": [
+        "tech_sub_10"
+      ],
+      "effect": {
+        "kind": "outputMul",
+        "res": "deepmass",
+        "value": 0.5
+      },
+      "desc": "深菌质地幔层产出 +50%。"
+    },
+    {
+      "id": "tech_sub_12",
+      "name": "地块扩张",
+      "branch": "substrate",
+      "tier": 6,
+      "cost": {
+        "spore": "500000",
+        "honeydew": "80000"
+      },
+      "requires": [
+        "tech_sub_8"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "layer_cap_up"
+      },
+      "desc": "每层节点上限 +10。"
+    },
+    {
+      "id": "tech_sub_13",
+      "name": "土壤记忆",
+      "branch": "substrate",
+      "tier": 5,
+      "cost": {
+        "gene": "30",
+        "honeydew": "20000"
+      },
+      "requires": [
+        "tech_sub_5"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "crop_rotation"
+      },
+      "desc": "轮作系统：同一地块在切换节点类型 3 次后获得 +20% 产出。"
+    },
+    {
+      "id": "tech_sub_14",
+      "name": "永续基质",
+      "branch": "substrate",
+      "tier": 8,
+      "cost": {
+        "law": "2",
+        "deepmass": "20000"
+      },
+      "requires": [
+        "tech_sub_6",
+        "tech_sub_11"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "perpetual_soil"
+      },
+      "desc": "采掘不再降低富饶度，但所有采掘产出 −25%。共存的代价。"
+    },
+    {
+      "id": "tech_cat_1",
+      "name": "催化矩阵强化 I",
+      "branch": "catalysis",
+      "tier": 2,
+      "cost": {
+        "enzyme": "100"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.05
+      },
+      "desc": "所有催化倍率 +0.05。"
+    },
+    {
+      "id": "tech_cat_2",
+      "name": "催化矩阵强化 II",
+      "branch": "catalysis",
+      "tier": 4,
+      "cost": {
+        "enzyme": "2000",
+        "sclerotium": "3"
+      },
+      "requires": [
+        "tech_cat_1"
+      ],
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.1
+      },
+      "desc": "所有催化倍率再 +0.10。"
+    },
+    {
+      "id": "tech_cat_3",
+      "name": "催化矩阵强化 III",
+      "branch": "catalysis",
+      "tier": 6,
+      "cost": {
+        "enzyme": "20000",
+        "signal": "80"
+      },
+      "requires": [
+        "tech_cat_2"
+      ],
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.15
+      },
+      "desc": "所有催化倍率再 +0.15。拓扑流的终局放大器。"
+    },
+    {
+      "id": "tech_cat_4",
+      "name": "反应反转",
+      "branch": "catalysis",
+      "tier": 5,
+      "cost": {
+        "toxin": "5000",
+        "gene": "10"
+      },
+      "requires": [
+        "tech_cat_2"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "negative_flip"
+      },
+      "desc": "把所有减益催化（毒素污染等）反转为等量增益。寄生流的翻盘点。"
+    },
+    {
+      "id": "tech_cat_5",
+      "name": "多阶催化",
+      "branch": "catalysis",
+      "tier": 6,
+      "cost": {
+        "signal": "150",
+        "sclerotium": "50"
+      },
+      "requires": [
+        "tech_cat_2"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "catalyst_third_order"
+      },
+      "desc": "催化倍率由前三条入边组合决定（而不只是最大值）。"
+    },
+    {
+      "id": "tech_cat_6",
+      "name": "级联倍增",
+      "branch": "catalysis",
+      "tier": 5,
+      "cost": {
+        "enzyme": "8000",
+        "sugar": "300000"
+      },
+      "requires": [
+        "tech_cat_1"
+      ],
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.08
+      },
+      "desc": "级联类催化再 +0.08，且不再受链长衰减影响。"
+    },
+    {
+      "id": "tech_cat_7",
+      "name": "跨层菌桥",
+      "branch": "catalysis",
+      "tier": 6,
+      "cost": {
+        "sclerotium": "80",
+        "signal": "120"
+      },
+      "requires": [
+        "tech_cat_5"
+      ],
+      "effect": {
+        "kind": "linkFlux",
+        "value": 0.2
+      },
+      "desc": "跨基质层的连线更粗：跨层连线通量 +20%。"
+    },
+    {
+      "id": "tech_cat_8",
+      "name": "自催化回路",
+      "branch": "catalysis",
+      "tier": 7,
+      "cost": {
+        "signal": "800",
+        "core": "15"
+      },
+      "requires": [
+        "tech_cat_5"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "autocatalysis"
+      },
+      "desc": "环状网络中每个节点获得 +25% 自我催化。"
+    },
+    {
+      "id": "tech_cat_9",
+      "name": "矩阵重排",
+      "branch": "catalysis",
+      "tier": 7,
+      "cost": {
+        "signal": "2000",
+        "law": "1"
+      },
+      "requires": [
+        "tech_cat_8"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "matrix_edit"
+      },
+      "desc": "玩家可拖动编辑催化矩阵中的任意一条规则的倍率（受总量守恒限制）。"
+    },
+    {
+      "id": "tech_cat_10",
+      "name": "过饱和",
+      "branch": "catalysis",
+      "tier": 6,
+      "cost": {
+        "enzyme": "50000",
+        "sclerotium": "120"
+      },
+      "requires": [
+        "tech_cat_3"
+      ],
+      "effect": {
+        "kind": "inputDiscount",
+        "value": -0.3
+      },
+      "desc": "输入超过需求 2 倍时产出 +30%，但酶消耗 +30%。高供给流派的开关。"
+    },
+    {
+      "id": "tech_cat_11",
+      "name": "催化记忆",
+      "branch": "catalysis",
+      "tier": 6,
+      "cost": {
+        "pheromone": "60000",
+        "gene": "25"
+      },
+      "requires": [
+        "tech_cat_3"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "catalyst_memory"
+      },
+      "desc": "切换配方后保留 50% 催化加成 60 秒。"
+    },
+    {
+      "id": "tech_cat_12",
+      "name": "负催化利用",
+      "branch": "catalysis",
+      "tier": 5,
+      "cost": {
+        "toxin": "20000",
+        "enzyme": "1000"
+      },
+      "requires": [
+        "tech_cat_4"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "negative_harvest"
+      },
+      "desc": "被减益的配方额外产出毒素（把污染变成原料）。"
+    },
+    {
+      "id": "tech_cat_13",
+      "name": "全域催化场",
+      "branch": "catalysis",
+      "tier": 8,
+      "cost": {
+        "law": "3",
+        "core": "100"
+      },
+      "requires": [
+        "tech_cat_9"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "global_catalyst_floor"
+      },
+      "desc": "任何节点的催化倍率下限提升到 1.20。"
+    },
+    {
+      "id": "tech_cat_14",
+      "name": "催化奇点",
+      "branch": "catalysis",
+      "tier": 9,
+      "cost": {
+        "law": "8",
+        "stardust": "3000"
+      },
+      "requires": [
+        "tech_cat_13"
+      ],
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.5
+      },
+      "desc": "所有催化倍率 +0.50。化学反应开始看起来像魔法。"
+    },
+    {
+      "id": "tech_sym_1",
+      "name": "条款扩槽 I",
+      "branch": "symbiosis",
+      "tier": 3,
+      "cost": {
+        "honeydew": "5000",
+        "pact": "100"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "unlock",
+        "value": "pact_slot_1"
+      },
+      "desc": "契约槽 +1，可同时与更多物种签约。"
+    },
+    {
+      "id": "tech_sym_2",
+      "name": "条款扩槽 II",
+      "branch": "symbiosis",
+      "tier": 5,
+      "cost": {
+        "pact": "800",
+        "gene": "15"
+      },
+      "requires": [
+        "tech_sym_1"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "pact_slot_2"
+      },
+      "desc": "契约槽再 +2，条款自由度提升。"
+    },
+    {
+      "id": "tech_sym_3",
+      "name": "违约豁免",
+      "branch": "symbiosis",
+      "tier": 5,
+      "cost": {
+        "pact": "1500",
+        "honeydew": "30000"
+      },
+      "requires": [
+        "tech_sym_1"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "pact_amnesty_tech"
+      },
+      "desc": "每 24 小时可豁免一次违约惩罚。"
+    },
+    {
+      "id": "tech_sym_4",
+      "name": "蜜露溢价 I",
+      "branch": "symbiosis",
+      "tier": 3,
+      "cost": {
+        "honeydew": "10000"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "outputMul",
+        "res": "honeydew",
+        "value": 0.2
+      },
+      "desc": "蜜露产出与售价比 +20%。"
+    },
+    {
+      "id": "tech_sym_5",
+      "name": "蜜露溢价 II",
+      "branch": "symbiosis",
+      "tier": 6,
+      "cost": {
+        "honeydew": "200000",
+        "gene": "40"
+      },
+      "requires": [
+        "tech_sym_4"
+      ],
+      "effect": {
+        "kind": "outputMul",
+        "res": "honeydew",
+        "value": 0.5
+      },
+      "desc": "蜜露再 +50%。维兰人的餐桌已经离不开你。"
+    },
+    {
+      "id": "tech_sym_6",
+      "name": "跨物种共感 I",
+      "branch": "symbiosis",
+      "tier": 4,
+      "cost": {
+        "gene": "5",
+        "pact": "300"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "outputMul",
+        "res": "pact",
+        "value": 0.25
+      },
+      "desc": "契约点产出 +25%。"
+    },
+    {
+      "id": "tech_sym_7",
+      "name": "跨物种共感 II",
+      "branch": "symbiosis",
+      "tier": 7,
+      "cost": {
+        "gene": "100",
+        "pact": "5000"
+      },
+      "requires": [
+        "tech_sym_6"
+      ],
+      "effect": {
+        "kind": "outputMul",
+        "res": "gene",
+        "value": 0.5
+      },
+      "desc": "基因片段产出 +50%。"
+    },
+    {
+      "id": "tech_sym_8",
+      "name": "藻类基因优化",
+      "branch": "symbiosis",
+      "tier": 5,
+      "cost": {
+        "gene": "20",
+        "light": "5000"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "outputMul",
+        "node": "algae_ii",
+        "value": 0.5
+      },
+      "desc": "藻类共生体 II 产出 +50%。"
+    },
+    {
+      "id": "tech_sym_9",
+      "name": "根瘤网络",
+      "branch": "symbiosis",
+      "tier": 6,
+      "cost": {
+        "gene": "50",
+        "sclerotium": "40"
+      },
+      "requires": [
+        "tech_sym_8"
+      ],
+      "effect": {
+        "kind": "outputMul",
+        "class": "symbiont",
+        "value": 0.2
+      },
+      "desc": "所有共生类节点互相连接时额外 +20%。"
+    },
+    {
+      "id": "tech_sym_10",
+      "name": "情报网",
+      "branch": "symbiosis",
+      "tier": 5,
+      "cost": {
+        "pheromone": "40000",
+        "pact": "600"
+      },
+      "requires": [
+        "tech_sym_6"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "event_forecast"
+      },
+      "desc": "事件提前 30 秒预警，负面事件有了准备时间。"
+    },
+    {
+      "id": "tech_sym_11",
+      "name": "外交特权",
+      "branch": "symbiosis",
+      "tier": 5,
+      "cost": {
+        "honeydew": "50000",
+        "pact": "1000"
+      },
+      "requires": [
+        "tech_sym_2"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "pact_cost_cut"
+      },
+      "desc": "契约履行成本 −20%，条款上限提升。"
+    },
+    {
+      "id": "tech_sym_12",
+      "name": "共生免疫",
+      "branch": "symbiosis",
+      "tier": 7,
+      "cost": {
+        "gene": "60",
+        "core": "10"
+      },
+      "requires": [
+        "tech_sym_9"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "hostility_immune"
+      },
+      "desc": "寄生行为不再累积敌意值。寄生流的核心保险。"
+    },
+    {
+      "id": "tech_sym_13",
+      "name": "贸易路线",
+      "branch": "symbiosis",
+      "tier": 6,
+      "cost": {
+        "honeydew": "100000",
+        "toxin": "8000"
+      },
+      "requires": [
+        "tech_sym_4"
+      ],
+      "effect": {
+        "kind": "marketFee",
+        "value": -0.02
+      },
+      "desc": "蜜露可自动按最优价出售，手续费 −2%。"
+    },
+    {
+      "id": "tech_sym_14",
+      "name": "生态代言人",
+      "branch": "symbiosis",
+      "tier": 8,
+      "cost": {
+        "law": "2",
+        "gene": "300"
+      },
+      "requires": [
+        "tech_sym_12"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "vael_land_grant"
+      },
+      "desc": "维兰人开始主动为你开垦地块（每游戏小时 +1 地块）。"
+    },
+    {
+      "id": "tech_time_1",
+      "name": "时间压缩 I",
+      "branch": "time",
+      "tier": 4,
+      "cost": {
+        "sclerotium": "5",
+        "spore": "100000"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "unlock",
+        "value": "compress_1_5"
+      },
+      "desc": "解锁 1.5× 时间压缩（产量与消耗同步提升）。"
+    },
+    {
+      "id": "tech_time_2",
+      "name": "时间压缩 II",
+      "branch": "time",
+      "tier": 6,
+      "cost": {
+        "sclerotium": "50",
+        "signal": "60"
+      },
+      "requires": [
+        "tech_time_1"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "compress_2"
+      },
+      "desc": "解锁 2× 时间压缩。"
+    },
+    {
+      "id": "tech_time_3",
+      "name": "时间压缩 III",
+      "branch": "time",
+      "tier": 8,
+      "cost": {
+        "core": "50",
+        "law": "1"
+      },
+      "requires": [
+        "tech_time_2"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "compress_3"
+      },
+      "desc": "解锁 3× 时间压缩（土壤消耗也 ×3，慎用）。"
+    },
+    {
+      "id": "tech_time_4",
+      "name": "离线代谢 I",
+      "branch": "time",
+      "tier": 3,
+      "cost": {
+        "sugar": "30000",
+        "water": "20000"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "offlineEfficiency",
+        "value": 0.5
+      },
+      "desc": "离线效率 100% → 150%。"
+    },
+    {
+      "id": "tech_time_5",
+      "name": "离线代谢 II",
+      "branch": "time",
+      "tier": 5,
+      "cost": {
+        "honeydew": "30000",
+        "sclerotium": "10"
+      },
+      "requires": [
+        "tech_time_4"
+      ],
+      "effect": {
+        "kind": "offlineEfficiency",
+        "value": 1
+      },
+      "desc": "离线效率 +100%（累计最高 250%）。"
+    },
+    {
+      "id": "tech_time_6",
+      "name": "离线代谢 III",
+      "branch": "time",
+      "tier": 7,
+      "cost": {
+        "core": "20",
+        "gene": "80"
+      },
+      "requires": [
+        "tech_time_5"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "offline_softcap_12h"
+      },
+      "desc": "离线上限从 8 小时提升到 12 小时，且衰减更缓。"
+    },
+    {
+      "id": "tech_time_7",
+      "name": "模块化生长",
+      "branch": "time",
+      "tier": 5,
+      "cost": {
+        "spore": "200000",
+        "sclerotium": "8"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "buildSpeed",
+        "value": 0.5
+      },
+      "desc": "所有节点建造时间 −50%。"
+    },
+    {
+      "id": "tech_time_8",
+      "name": "时间银行 I",
+      "branch": "time",
+      "tier": 6,
+      "cost": {
+        "core": "10",
+        "sclerotium": "80"
+      },
+      "requires": [
+        "tech_time_2"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "timebank_2h"
+      },
+      "desc": "可储存最多 2 小时产量，随时取出。"
+    },
+    {
+      "id": "tech_time_9",
+      "name": "时间银行 II",
+      "branch": "time",
+      "tier": 8,
+      "cost": {
+        "core": "60",
+        "law": "1"
+      },
+      "requires": [
+        "tech_time_8"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "timebank_8h"
+      },
+      "desc": "储存上限提升到 8 小时。出差前记得打开。"
+    },
+    {
+      "id": "tech_time_10",
+      "name": "快进孢子",
+      "branch": "time",
+      "tier": 6,
+      "cost": {
+        "spore": "500000",
+        "sclerotium": "30"
+      },
+      "requires": [
+        "tech_time_2"
+      ],
+      "effect": {
+        "kind": "outputMul",
+        "res": "spore",
+        "value": 0.3
+      },
+      "desc": "孢子产出 +30%，但水消耗 +50%。"
+    },
+    {
+      "id": "tech_time_11",
+      "name": "时间裂片",
+      "branch": "time",
+      "tier": 7,
+      "cost": {
+        "signal": "500",
+        "core": "15"
+      },
+      "requires": [
+        "tech_time_3"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "time_shard"
+      },
+      "desc": "每 10 分钟触发一次 30 秒的 3× 加速，无额外消耗。"
+    },
+    {
+      "id": "tech_time_12",
+      "name": "时间回溯",
+      "branch": "time",
+      "tier": 9,
+      "cost": {
+        "law": "5",
+        "echo": "1"
+      },
+      "requires": [
+        "tech_time_9"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "rewind"
+      },
+      "desc": "撤销最近 5 分钟的全部操作（每游戏日一次）。"
+    },
+    {
+      "id": "tech_for_1",
+      "name": "逆熵生产 I",
+      "branch": "forbidden",
+      "tier": 6,
+      "cost": {
+        "core": "5",
+        "signal": "200"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "unlock",
+        "value": "reverse_recipe_1"
+      },
+      "desc": "部分配方可反向运行：产物变原料，效率 60%。"
+    },
+    {
+      "id": "tech_for_2",
+      "name": "逆熵生产 II",
+      "branch": "forbidden",
+      "tier": 8,
+      "cost": {
+        "core": "80",
+        "law": "2"
+      },
+      "requires": [
+        "tech_for_1"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "reverse_recipe_2"
+      },
+      "desc": "反向效率提升到 100%，且可用于高级配方。"
+    },
+    {
+      "id": "tech_for_3",
+      "name": "资源复制 I",
+      "branch": "forbidden",
+      "tier": 6,
+      "cost": {
+        "sclerotium": "150",
+        "enzyme": "20000"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "unlock",
+        "value": "copy_5"
+      },
+      "desc": "5% 概率复制一次产出。"
+    },
+    {
+      "id": "tech_for_4",
+      "name": "资源复制 II",
+      "branch": "forbidden",
+      "tier": 8,
+      "cost": {
+        "core": "40",
+        "sclerotium": "400"
+      },
+      "requires": [
+        "tech_for_3"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "copy_12"
+      },
+      "desc": "复制概率提升到 12%，且可被 Combo 进一步放大。"
+    },
+    {
+      "id": "tech_for_5",
+      "name": "超载 I",
+      "branch": "forbidden",
+      "tier": 5,
+      "cost": {
+        "toxin": "30000",
+        "signal": "50"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "unlock",
+        "value": "overload_150"
+      },
+      "desc": "节点可超载至 150% 通量，过热会损伤土壤。"
+    },
+    {
+      "id": "tech_for_6",
+      "name": "超载 II",
+      "branch": "forbidden",
+      "tier": 7,
+      "cost": {
+        "core": "25",
+        "toxin": "200000"
+      },
+      "requires": [
+        "tech_for_5"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "overload_200"
+      },
+      "desc": "超载上限提升到 200%，并解锁散热菌丝（过热减半）。"
+    },
+    {
+      "id": "tech_for_7",
+      "name": "熵泵",
+      "branch": "forbidden",
+      "tier": 7,
+      "cost": {
+        "core": "15",
+        "deepmass": "10000"
+      },
+      "requires": [
+        "tech_for_1"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "entropy_pump"
+      },
+      "desc": "解锁熵泵：直接消耗地块富饶度换取产量（1 富饶度 = 10 秒满产）。"
+    },
+    {
+      "id": "tech_for_8",
+      "name": "规则碎片合成 I",
+      "branch": "forbidden",
+      "tier": 8,
+      "cost": {
+        "stardust": "200"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "unlock",
+        "value": "craft_law_1"
+      },
+      "desc": "3 星尘 → 1 法则碎片。"
+    },
+    {
+      "id": "tech_for_9",
+      "name": "规则碎片合成 II",
+      "branch": "forbidden",
+      "tier": 9,
+      "cost": {
+        "stardust": "2000",
+        "echo": "1"
+      },
+      "requires": [
+        "tech_for_8"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "craft_law_2"
+      },
+      "desc": "合成效率翻倍（2 星尘 → 1 法则），并解锁定向法则选择。"
+    },
+    {
+      "id": "tech_for_10",
+      "name": "镜像孪生",
+      "branch": "forbidden",
+      "tier": 7,
+      "cost": {
+        "signal": "1500",
+        "sclerotium": "200"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "outputMul",
+        "node": "mirror_node",
+        "value": 0.5
+      },
+      "desc": "镜像节点复制比例 +50%。"
+    },
+    {
+      "id": "tech_for_11",
+      "name": "虚空培育",
+      "branch": "forbidden",
+      "tier": 8,
+      "cost": {
+        "voidspore": "1"
+      },
+      "requires": [],
+      "effect": {
+        "kind": "unlock",
+        "value": "void_node"
+      },
+      "desc": "解锁虚空菌床专属节点『虚无腔』：产出为相邻节点总和的 20%。"
+    },
+    {
+      "id": "tech_for_12",
+      "name": "现实覆盖",
+      "branch": "forbidden",
+      "tier": 9,
+      "cost": {
+        "law": "10",
+        "stardust": "10000"
+      },
+      "requires": [
+        "tech_for_9",
+        "tech_cat_9"
+      ],
+      "effect": {
+        "kind": "unlock",
+        "value": "reality_override"
+      },
+      "desc": "选择任意一条配方，把它彻底重写（输入输出由玩家指定，守恒由网络自偿）。"
+    }
+  ]
+}

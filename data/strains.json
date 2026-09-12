@@ -1,0 +1,148 @@
+{
+  "tableVersion": 1,
+  "comment": "菌株（Build）定义。每种菌株都改写规则而不只是加数值 —— 这是 6 种流派玩法差异的来源。effects/drawbacks 使用与升级相同的 EffectDef 结构；specials 是需要引擎特殊处理的开关。",
+  "specialKinds": [
+    "soil_no_self_repair — 枯竭土壤不再自然恢复（只能靠修复或轮作）",
+    "offline_cap_24h — 离线收益上限从 12h 提升到 24h",
+    "negative_event_profit — 负面事件按强度转化为深菌质",
+    "catalyst_multiplicative — 多条催化规则改为相乘而非相加",
+    "topology_bonus — 每 10 条连线额外获得全局产出 +8%",
+    "sporogene_keep_10pct — 孢子化时保留 10% 孢子基因"
+  ],
+  "strains": [
+    {
+      "id": "rotten",
+      "name": "腐生菌株",
+      "glyph": "腐",
+      "hue": 22,
+      "unlockLevel": 0,
+      "geneCost": "0",
+      "tagline": "把整片土壤嚼碎",
+      "desc": "榨取式扩张：采集产出极高，但土壤以两倍速度枯竭，而且枯竭后不再自行恢复。",
+      "ruleChanges": [
+        "采集类节点产出 +60%",
+        "土壤枯竭速度 ×2.2",
+        "枯竭土壤不再自然恢复（只能靠修复或轮作）"
+      ],
+      "effects": [
+        { "kind": "outputMul", "class": "extractor", "value": 0.6, "desc": "采集类产出 +60%" }
+      ],
+      "drawbacks": [
+        { "kind": "depletionMul", "value": 1.2, "desc": "土壤枯竭速度 +120%" }
+      ],
+      "specials": ["soil_no_self_repair"]
+    },
+    {
+      "id": "symbiont",
+      "name": "共生菌株",
+      "glyph": "共",
+      "hue": 140,
+      "unlockLevel": 0,
+      "geneCost": "0",
+      "tagline": "把手伸向地表",
+      "desc": "交换式生长：共生类产出与离线效率极高，代价是手动操作几乎无用。适合挂着不管的玩法。",
+      "ruleChanges": [
+        "共生类节点产出 +45%",
+        "离线效率 +50%，离线收益上限 12h → 24h",
+        "连击（手动操作）加成减半"
+      ],
+      "effects": [
+        { "kind": "outputMul", "class": "symbiont", "value": 0.45, "desc": "共生类产出 +45%" },
+        { "kind": "offlineEfficiency", "value": 0.5, "desc": "离线效率 +50%" }
+      ],
+      "drawbacks": [
+        { "kind": "manualMul", "value": -0.5, "desc": "手动连击加成 -50%" }
+      ],
+      "specials": ["offline_cap_24h"]
+    },
+    {
+      "id": "parasite",
+      "name": "寄生菌株",
+      "glyph": "寄",
+      "hue": 310,
+      "unlockLevel": 1,
+      "geneCost": "10",
+      "tagline": "让地表的伤口供养你",
+      "desc": "掠夺式生存：毒素与契约点暴涨，连灾难都能变成收成 —— 但你更容易被事件击中，也更容易招来围剿。",
+      "ruleChanges": [
+        "毒素产出 +80%、契约点产出 +50%",
+        "负面事件不再纯惩罚：按强度转化为深菌质",
+        "事件抗性 -20%"
+      ],
+      "effects": [
+        { "kind": "outputMul", "res": "toxin", "value": 0.8, "desc": "毒素产出 +80%" },
+        { "kind": "outputMul", "res": "pact", "value": 0.5, "desc": "契约点产出 +50%" }
+      ],
+      "drawbacks": [
+        { "kind": "eventResist", "value": -0.2, "desc": "事件抗性 -20%" }
+      ],
+      "specials": ["negative_event_profit"]
+    },
+    {
+      "id": "catalyst",
+      "name": "催化菌株",
+      "glyph": "催",
+      "hue": 48,
+      "unlockLevel": 1,
+      "geneCost": "10",
+      "tagline": "让每一次接触都引爆",
+      "desc": "拓扑敏感流派：催化加成大幅提升且多条催化改为相乘，但一切都更贵。",
+      "ruleChanges": [
+        "催化加成 +80%",
+        "多条催化规则改为相乘叠加（而非相加）",
+        "所有节点成本增长率 +0.03"
+      ],
+      "effects": [
+        { "kind": "catalystBonus", "value": 0.8, "desc": "催化加成 +80%" }
+      ],
+      "drawbacks": [
+        { "kind": "costGrowthAdd", "value": 0.03, "desc": "成本增长率 +0.03" }
+      ],
+      "specials": ["catalyst_multiplicative"]
+    },
+    {
+      "id": "weaver",
+      "name": "织网菌株",
+      "glyph": "织",
+      "hue": 190,
+      "unlockLevel": 2,
+      "geneCost": "25",
+      "tagline": "连接本身就是产物",
+      "desc": "拓扑流派：连线越多越强，采集本身很弱。奖励把网络铺得又长又密的人。",
+      "ruleChanges": [
+        "连线通量 +50%",
+        "每 10 条连线额外获得全局产出 +8%",
+        "采集类产出 -25%"
+      ],
+      "effects": [
+        { "kind": "linkFlux", "value": 0.5, "desc": "连线通量 +50%" }
+      ],
+      "drawbacks": [
+        { "kind": "outputMul", "class": "extractor", "value": -0.25, "desc": "采集类产出 -25%" }
+      ],
+      "specials": ["topology_bonus"]
+    },
+    {
+      "id": "sporer",
+      "name": "孢子菌株",
+      "glyph": "孢",
+      "hue": 272,
+      "unlockLevel": 2,
+      "geneCost": "25",
+      "tagline": "活着就是为了再次离开",
+      "desc": "高频重置流派：孢子化收益更高且保留一部分基因，代价是本轮产出整体偏低。",
+      "ruleChanges": [
+        "孢子化收益 +50%",
+        "孢子化时保留 10% 孢子基因（其余归零）",
+        "全局产出 -30%"
+      ],
+      "effects": [
+        { "kind": "prestigeGain", "value": 0.5, "desc": "孢子化收益 +50%" }
+      ],
+      "drawbacks": [
+        { "kind": "outputMul", "value": -0.3, "desc": "全局产出 -30%" }
+      ],
+      "specials": ["sporogene_keep_10pct"]
+    }
+  ]
+}

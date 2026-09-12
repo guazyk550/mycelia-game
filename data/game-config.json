@@ -1,0 +1,116 @@
+{
+  "tableVersion": 1,
+  "comment": "全局配置与调参旋钮。代码中不允许出现本文件之外的平衡常数。",
+  "simulation": {
+    "tickRateMs": 100,
+    "maxCatchUpTicks": 600,
+    "maxStepsPerFrame": 20,
+    "deterministicSeed": 20260101
+  },
+  "newGame": {
+    "startingResources": {
+      "humus": "0", "mineral": "0", "water": "0", "light": "0",
+      "sugar": "0", "enzyme": "0", "spore": "120", "toxin": "0",
+      "honeydew": "0", "pact": "0", "gene": "0", "pheromone": "0",
+      "sclerotium": "0", "signal": "0", "core": "0", "deepmass": "0",
+      "sporogene": "0", "strain": "0", "stardust": "0", "law": "0",
+      "voidspore": "0", "echo": "0"
+    },
+    "freeNodes": [{ "node": "decomposer_i", "layer": "topsoil", "x": 0, "y": 0 }],
+    "startLayer": "topsoil",
+    "unlockedResources": ["humus", "mineral", "water", "light", "sugar", "enzyme", "spore", "toxin"]
+  },
+  "prestige": {
+    "networkValueBase": "150000",
+    "exponent": 0.55,
+    "softCapMultiplier": 3.0,
+    "minGain": 1,
+    "strainCooldownHours": 24,
+    "levelThresholds": {
+      "p1": {},
+      "p2": { "sporogene": "500", "gene": "20" },
+      "p3": { "strain": "1", "core": "50" },
+      "p4": { "signal": "100", "core": "500" },
+      "p5": { "law": "10", "stardust": "1000" }
+    }
+  },
+  "market": {
+    "theta": 0.05,
+    "sigma": 0.03,
+    "depthBase": "100000",
+    "feeBase": 0.02,
+    "feeRampPerFastTrade": 0.01,
+    "feeRampWindowSec": 60,
+    "clampLow": 0.2,
+    "clampHigh": 3.0
+  },
+  "timeBank": {
+    "capHours": 8,
+    "depositRatePerSec": 0.05,
+    "withdrawLoss": 0.25,
+    "unlockTech": "timebank_8h"
+  },
+  "events": {
+    "meanIntervalSec": 180,
+    "maxActive": 3,
+    "perHostility": { "negWeightMulPer10": 0.06, "siegeThreshold": 60 },
+    "neutralDecayPerSec": 0.02,
+    "contractRelief": 8
+  },
+  "offline": {
+    "baseEfficiency": 1.0,
+    "maxEfficiency": 5.0,
+    "softCapStartHours": 2,
+    "softCapFullHours": 8,
+    "softCapFloor": 0.5,
+    "hardCapHours": 12,
+    "maxEventCount": 8
+  },
+  "combo": {
+    "windowSec": 3,
+    "decaySec": 5,
+    "maxStack": 100,
+    "perStackBonus": 0.01,
+    "validActions": ["buildNode", "link", "buyUpgrade", "buyTech", "trade", "signPact", "switchRecipe"]
+  },
+  "crit": {
+    "baseChance": 0.0,
+    "baseMultiplier": 2.0
+  },
+  "soil": {
+    "richnessMulFloor": 0.35,
+    "repairBase": 0.0,
+    "rotationBonusPerSwap": 0.05,
+    "rotationMaxSwaps": 4
+  },
+  "time": {
+    "dayLengthSec": 600,
+    "seasonLengthSec": 3600,
+    "seasonMultipliers": {
+      "spring": { "sugar": 1.10, "spore": 1.15 },
+      "summer": { "light": 1.30, "water": 0.85 },
+      "autumn": { "humus": 1.25, "honeydew": 1.10 },
+      "winter": { "light": 0.60, "enzyme": 0.90 }
+    }
+  },
+  "automation": {
+    "tierIntervalSec": { "1": 5, "2": 10, "3": 2, "4": 1, "5": 30 },
+    "ruleMaxPerTick": 200,
+    "defaultRuleSlots": 3
+  },
+  "antiCheat": {
+    "maxSingleDeltaSec": 5,
+    "maxOfflineSec": 43200,
+    "clockBackToleranceSec": 60,
+    "saveChecksum": "fnv1a32"
+  },
+  "save": {
+    "autoSaveIntervalSec": 30,
+    "slots": 4,
+    "version": 1
+  },
+  "debug": {
+    "assertInvariants": true,
+    "logNanSource": true
+  }
+}

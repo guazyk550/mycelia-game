@@ -1,0 +1,136 @@
+{
+  "tableVersion": 1,
+  "comment": "生态法则：消耗「生态法则碎片」永久改写一条公式。与升级/科技的区别在于 —— 它改的是曲线本身（成本增长率、离线上限、成熟度下限、事件频率），不是叠加一个倍率。",
+  "effectKinds": [
+    "recipeRateMul — 某资源产出倍率加成（value 为比例，0.25 = +25%）",
+    "costGrowthCut — 所有节点成本增长率下降（value 为绝对量，0.02 = 增长率 -0.02）",
+    "catalystBonus — 催化加成（同升级口径）",
+    "offlineHoursAdd — 离线上限增加小时数",
+    "maturityFloorAdd — 孢子化成熟度下限提升",
+    "richnessRepair — 土壤自然恢复（每秒百分点）",
+    "eventRateCut — 事件频率下降比例",
+    "marketDepthMul — 市场深度提升比例",
+    "matrixOverride — 改写催化矩阵中某条规则的倍率（value 为新的 rateMul）"
+  ],
+  "laws": [
+    {
+      "id": "law_nourish",
+      "name": "滋养律",
+      "desc": "改写养分的搬运效率 —— 这条法则让某一类产出不再受旧公式约束。",
+      "cost": "1",
+      "maxStacks": 3,
+      "needsTarget": true,
+      "targetKind": "resource",
+      "effect": {
+        "kind": "recipeRateMul",
+        "value": 0.25,
+        "desc": "目标资源产出 +25%（可叠加）"
+      }
+    },
+    {
+      "id": "law_frugal",
+      "name": "廉直律",
+      "desc": "改写生长的代价曲线 —— 每叠加一次，所有节点的成本增长率永久降低。",
+      "cost": "1",
+      "maxStacks": 3,
+      "needsTarget": false,
+      "effect": {
+        "kind": "costGrowthCut",
+        "value": 0.02,
+        "desc": "所有节点成本增长率 -0.02"
+      }
+    },
+    {
+      "id": "law_resonance",
+      "name": "共鸣律",
+      "desc": "改写接触面的放大方式 —— 催化加成不再只是相加。",
+      "cost": "1",
+      "maxStacks": 5,
+      "needsTarget": false,
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.15,
+        "desc": "催化加成 +15%"
+      }
+    },
+    {
+      "id": "law_slumber",
+      "name": "长眠律",
+      "desc": "改写时间的边界 —— 你离开时，网络仍在更久地处生长。",
+      "cost": "1",
+      "maxStacks": 4,
+      "needsTarget": false,
+      "effect": {
+        "kind": "offlineHoursAdd",
+        "value": 2,
+        "desc": "离线收益上限 +2 小时"
+      }
+    },
+    {
+      "id": "law_ripen",
+      "name": "速熟律",
+      "desc": "改写成熟的定义 —— 即使刚重生，你也已经算\"长够了\"。",
+      "cost": "1",
+      "maxStacks": 4,
+      "needsTarget": false,
+      "effect": {
+        "kind": "maturityFloorAdd",
+        "value": 0.05,
+        "desc": "孢子化成熟度下限 +0.05"
+      }
+    },
+    {
+      "id": "law_loam",
+      "name": "沃土律",
+      "desc": "改写土壤的愈合速度 —— 被榨干的基质会自己慢慢长回来。",
+      "cost": "1",
+      "maxStacks": 3,
+      "needsTarget": false,
+      "effect": {
+        "kind": "richnessRepair",
+        "value": 0.02,
+        "desc": "土壤每秒恢复 +0.02"
+      }
+    },
+    {
+      "id": "law_silence",
+      "name": "静默律",
+      "desc": "改写世界的注意力 —— 地表更少想起你，灾难也随之稀疏。",
+      "cost": "1",
+      "maxStacks": 3,
+      "needsTarget": false,
+      "effect": {
+        "kind": "eventRateCut",
+        "value": 0.15,
+        "desc": "事件频率 -15%"
+      }
+    },
+    {
+      "id": "law_deepflow",
+      "name": "深流律",
+      "desc": "改写菌市的胃口 —— 你卖出再多，价格也不会塌得那么快。",
+      "cost": "1",
+      "maxStacks": 2,
+      "needsTarget": false,
+      "effect": {
+        "kind": "marketDepthMul",
+        "value": 0.5,
+        "desc": "市场深度 +50%"
+      }
+    },
+    {
+      "id": "law_matrix",
+      "name": "矩阵律",
+      "desc": "直接改写催化矩阵中的一条规则 —— 不改倍率，改的是\"哪一种连接算数\"。",
+      "cost": "2",
+      "maxStacks": 1,
+      "needsTarget": true,
+      "targetKind": "catalystRule",
+      "effect": {
+        "kind": "matrixOverride",
+        "value": 1.5,
+        "desc": "把选定的催化规则倍率改写为 ×1.5"
+      }
+    }
+  ]
+}

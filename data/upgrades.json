@@ -1,0 +1,1821 @@
+{
+  "tableVersion": 1,
+  "effectKinds": [
+    "buildSpeed — 建造时间缩短（value 为折扣比例）",
+    "outputMul — 产出倍率加成（value 为小数，0.25 = +25%；可用 node / res / class 之一作为过滤范围，全空则为全局）",
+    "inputDiscount — 配方输入折扣（0–0.8）",
+    "buildCostDiscount — 建造成本折扣",
+    "catalystBonus — 催化倍率全局加成",
+    "richnessRepair — 每秒土壤修复量（百分点）",
+    "richnessFloor — 枯竭下限提升（百分点）",
+    "richnessCap — 富饶度上限提升（比例，0.2 = +20%）",
+    "depletionReduce — 采掘对土壤的伤害折扣",
+    "offlineEfficiency — 离线效率加成",
+    "critChance — 出芽暴击概率",
+    "critMul — 暴击倍率",
+    "linkFlux — 连线通量加成",
+    "resourceCap — 资源上限加成",
+    "prestigeGain — 孢子化收益加成",
+    "eventResist — 事件强度减免",
+    "marketFee — 市场手续费修正（负值为减免）",
+    "autoTier — 解锁自动化层级（value 为目标层级）",
+    "ruleSlot — 自动化规则槽 +N",
+    "unlock — 解锁内容（value 为内容 id）",
+    "depletionMul — 土壤枯竭速度倍率加成（value 为比例，1.2 = 枯竭快 120%）",
+    "manualMul — 手动操作（连击）收益修正（负值为惩罚）",
+    "costGrowthAdd — 节点成本增长率加值（0.03 = 增长率 +0.03）",
+    "grantResource — 直接发放资源（value 为数量，res 指定资源；用于隐藏奖励）"
+  ],
+  "upgrades": [
+    {
+      "id": "up_dec1_a",
+      "name": "密织菌丝",
+      "cat": "node",
+      "target": "decomposer_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "15"
+      },
+      "growth": 1.22,
+      "effect": {
+        "kind": "outputMul",
+        "node": "decomposer_i",
+        "value": 0.25
+      },
+      "desc": "分解丝 I 产出 +25%/级。"
+    },
+    {
+      "id": "up_dec1_b",
+      "name": "腐熟剂",
+      "cat": "node",
+      "target": "decomposer_i",
+      "maxLevel": 5,
+      "cost": {
+        "sugar": "15"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "depletionReduce",
+        "node": "decomposer_i",
+        "value": 0.15
+      },
+      "desc": "分解丝 I 对土壤的伤害 −15%/级。"
+    },
+    {
+      "id": "up_dec2_a",
+      "name": "膨胀腔",
+      "cat": "node",
+      "target": "decomposer_ii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "191",
+        "sugar": "124"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "node": "decomposer_ii",
+        "value": 0.25
+      },
+      "desc": "分解丝 II 产出 +25%/级。"
+    },
+    {
+      "id": "up_dec3_a",
+      "name": "工业胃",
+      "cat": "node",
+      "target": "decomposer_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "2836",
+        "sugar": "1891",
+        "enzyme": "19"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": "decomposer_iii",
+        "value": 0.3
+      },
+      "desc": "分解丝 III 产出 +25%/级。"
+    },
+    {
+      "id": "up_bor1_a",
+      "name": "酸蚀尖",
+      "cat": "node",
+      "target": "borer_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "41",
+        "mineral": "10"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "node": "borer_i",
+        "value": 0.3
+      },
+      "desc": "掘进菌柄 I 产出 +30%/级。"
+    },
+    {
+      "id": "up_bor2_a",
+      "name": "压力腔",
+      "cat": "node",
+      "target": "borer_ii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "616",
+        "mineral": "137"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "outputMul",
+        "node": "borer_ii",
+        "value": 0.3
+      },
+      "desc": "掘进菌柄 II 产出 +30%/级。"
+    },
+    {
+      "id": "up_bor3_a",
+      "name": "钻场阵列",
+      "cat": "node",
+      "target": "borer_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "8315",
+        "mineral": "2217",
+        "sclerotium": "3"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "borer_iii",
+        "value": 0.35
+      },
+      "desc": "掘进菌柄 III 产出 +30%/级。"
+    },
+    {
+      "id": "up_hyd1_a",
+      "name": "毛细束",
+      "cat": "node",
+      "target": "hydra_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "24"
+      },
+      "growth": 1.22,
+      "effect": {
+        "kind": "outputMul",
+        "node": "hydra_i",
+        "value": 0.3
+      },
+      "desc": "吸水菌丝 I 产出 +30%/级。"
+    },
+    {
+      "id": "up_hyd2_a",
+      "name": "潜水层泵",
+      "cat": "node",
+      "target": "hydra_ii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "281",
+        "sugar": "169"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "node": "hydra_ii",
+        "value": 0.3
+      },
+      "desc": "吸水菌丝 II 产出 +30%/级。"
+    },
+    {
+      "id": "up_hyd3_a",
+      "name": "暗河引流",
+      "cat": "node",
+      "target": "hydra_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "3968",
+        "sugar": "2480",
+        "sclerotium": "2"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": "hydra_iii",
+        "value": 0.3
+      },
+      "desc": "吸水菌丝 III 产出 +30%/级。"
+    },
+    {
+      "id": "up_pht1_a",
+      "name": "反光冠",
+      "cat": "node",
+      "target": "photoreceptor_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "34",
+        "sugar": "20"
+      },
+      "growth": 1.22,
+      "effect": {
+        "kind": "outputMul",
+        "node": "photoreceptor_i",
+        "value": 0.35
+      },
+      "desc": "感光菌帽 I 产出 +35%/级。"
+    },
+    {
+      "id": "up_pht2_a",
+      "name": "冠层",
+      "cat": "node",
+      "target": "photoreceptor_ii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "401",
+        "sugar": "229"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "node": "photoreceptor_ii",
+        "value": 0.35
+      },
+      "desc": "感光菌帽 II 产出 +35%/级。"
+    },
+    {
+      "id": "up_pht3_a",
+      "name": "光林",
+      "cat": "node",
+      "target": "photoreceptor_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "5141",
+        "sugar": "3272",
+        "sclerotium": "2"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": "photoreceptor_iii",
+        "value": 0.35
+      },
+      "desc": "感光菌帽 III 产出 +35%/级。"
+    },
+    {
+      "id": "up_sac1_a",
+      "name": "双槽水解",
+      "cat": "node",
+      "target": "saccharifier_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "22",
+        "sugar": "14"
+      },
+      "growth": 1.22,
+      "effect": {
+        "kind": "outputMul",
+        "node": "saccharifier_i",
+        "value": 0.25
+      },
+      "desc": "糖化腔 I 产出 +25%/级。"
+    },
+    {
+      "id": "up_sac2_a",
+      "name": "酶回收环",
+      "cat": "node",
+      "target": "saccharifier_ii",
+      "maxLevel": 10,
+      "cost": {
+        "sugar": "628",
+        "enzyme": "14"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "inputDiscount",
+        "node": "saccharifier_ii",
+        "value": 0.08
+      },
+      "desc": "糖化腔 II 的酶消耗 −8%/级（可叠至 −80%）。"
+    },
+    {
+      "id": "up_sac3_a",
+      "name": "连续流",
+      "cat": "node",
+      "target": "saccharifier_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "5957",
+        "sugar": "3829",
+        "sclerotium": "3"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": "saccharifier_iii",
+        "value": 0.3
+      },
+      "desc": "糖化腔 III 产出 +25%/级。"
+    },
+    {
+      "id": "up_enz1_a",
+      "name": "分泌板",
+      "cat": "node",
+      "target": "enzyme_gland_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "77",
+        "sugar": "58"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "node": "enzyme_gland_i",
+        "value": 0.25
+      },
+      "desc": "酶腺 I 产出 +25%/级。"
+    },
+    {
+      "id": "up_enz2_a",
+      "name": "循环酶池",
+      "cat": "node",
+      "target": "enzyme_gland_ii",
+      "maxLevel": 10,
+      "cost": {
+        "sugar": "1201",
+        "sclerotium": "2"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "outputMul",
+        "node": "enzyme_gland_ii",
+        "value": 0.28
+      },
+      "desc": "酶腺 II 产出 +25%/级。"
+    },
+    {
+      "id": "up_enz3_a",
+      "name": "酶工厂",
+      "cat": "node",
+      "target": "enzyme_gland_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "8482",
+        "sugar": "5938",
+        "sclerotium": "4"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "enzyme_gland_iii",
+        "value": 0.35
+      },
+      "desc": "酶腺 III 产出 +35%/级。"
+    },
+    {
+      "id": "up_tox1_a",
+      "name": "加压毒囊",
+      "cat": "node",
+      "target": "toxin_gland_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "173",
+        "mineral": "52"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "node": "toxin_gland_i",
+        "value": 0.3
+      },
+      "desc": "毒素腺 I 产出 +30%/级。"
+    },
+    {
+      "id": "up_tox2_a",
+      "name": "神经毒",
+      "cat": "node",
+      "target": "toxin_gland_ii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "1505",
+        "mineral": "451"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "outputMul",
+        "node": "toxin_gland_ii",
+        "value": 0.3
+      },
+      "desc": "毒素腺 II 产出 +30%/级。"
+    },
+    {
+      "id": "up_tox3_a",
+      "name": "生化库",
+      "cat": "node",
+      "target": "toxin_gland_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "17065",
+        "mineral": "5461",
+        "sclerotium": "10"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "toxin_gland_iii",
+        "value": 0.35
+      },
+      "desc": "毒素腺 III 产出 +30%/级。"
+    },
+    {
+      "id": "up_spo1_a",
+      "name": "弹射机构",
+      "cat": "node",
+      "target": "sporangium_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "92",
+        "sugar": "73"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "node": "sporangium_i",
+        "value": 0.3
+      },
+      "desc": "孢子囊 I 产出 +30%/级。"
+    },
+    {
+      "id": "up_spo2_a",
+      "name": "孢子床",
+      "cat": "node",
+      "target": "sporangium_ii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "861",
+        "sugar": "669"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "outputMul",
+        "node": "sporangium_ii",
+        "value": 0.3
+      },
+      "desc": "孢子囊 II 产出 +30%/级。"
+    },
+    {
+      "id": "up_spo3_a",
+      "name": "雪崩线",
+      "cat": "node",
+      "target": "sporangium_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "10234",
+        "sugar": "7443",
+        "sclerotium": "6"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "sporangium_iii",
+        "value": 0.35
+      },
+      "desc": "孢子囊 III 产出 +30%/级。"
+    },
+    {
+      "id": "up_alg1_a",
+      "name": "藻株优选",
+      "cat": "node",
+      "target": "algae_i",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "287",
+        "honeydew": "43"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "outputMul",
+        "node": "algae_i",
+        "value": 0.3
+      },
+      "desc": "藻类共生体 I 产出 +30%/级。"
+    },
+    {
+      "id": "up_alg2_a",
+      "name": "藻海",
+      "cat": "node",
+      "target": "algae_ii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "3485",
+        "honeydew": "418"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": "algae_ii",
+        "value": 0.3
+      },
+      "desc": "藻类共生体 II 产出 +30%/级。"
+    },
+    {
+      "id": "up_alg3_a",
+      "name": "潮汐节律",
+      "cat": "node",
+      "target": "algae_iii",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "42212",
+        "honeydew": "2814",
+        "gene": "4"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "algae_iii",
+        "value": 0.35
+      },
+      "desc": "藻类共生体 III 产出 +30%/级。"
+    },
+    {
+      "id": "up_phe_a",
+      "name": "嗅觉放大",
+      "cat": "node",
+      "target": "pheromone_gland",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "2704",
+        "sugar": "1802"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": "pheromone_gland",
+        "value": 0.3
+      },
+      "desc": "信息素腺产出 +30%/级。"
+    },
+    {
+      "id": "up_sig_a",
+      "name": "髓鞘化",
+      "cat": "node",
+      "target": "signal_node",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "9278",
+        "pheromone": "337"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "signal_node",
+        "value": 0.35
+      },
+      "desc": "电信号节点产出 +30%/级。"
+    },
+    {
+      "id": "up_rel_a",
+      "name": "粗化",
+      "cat": "node",
+      "target": "relay",
+      "maxLevel": 5,
+      "cost": {
+        "spore": "4500",
+        "sclerotium": "9"
+      },
+      "growth": 1.32,
+      "effect": {
+        "kind": "linkFlux",
+        "node": "relay",
+        "value": 0.5
+      },
+      "desc": "中继的通量加成 +50%/级。"
+    },
+    {
+      "id": "up_scl_a",
+      "name": "超压成型",
+      "cat": "node",
+      "target": "sclerotium_press",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "8065",
+        "enzyme": "215"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "sclerotium_press",
+        "value": 0.35
+      },
+      "desc": "菌核压机产出 +35%/级。"
+    },
+    {
+      "id": "up_cor_a",
+      "name": "三相共振",
+      "cat": "node",
+      "target": "core_chamber",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "18572",
+        "sclerotium": "41",
+        "signal": "17"
+      },
+      "growth": 1.32,
+      "effect": {
+        "kind": "outputMul",
+        "node": "core_chamber",
+        "value": 0.35
+      },
+      "desc": "核心腔产出 +35%/级。"
+    },
+    {
+      "id": "up_dee_a",
+      "name": "深钻头",
+      "cat": "node",
+      "target": "deep_drill",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "60067",
+        "sclerotium": "120",
+        "core": "8"
+      },
+      "growth": 1.32,
+      "effect": {
+        "kind": "outputMul",
+        "node": "deep_drill",
+        "value": 0.35
+      },
+      "desc": "深菌钻产出 +35%/级。"
+    },
+    {
+      "id": "up_hiv_a",
+      "name": "巢群协议",
+      "cat": "node",
+      "target": "hive_hub",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "150749",
+        "signal": "754"
+      },
+      "growth": 1.35,
+      "effect": {
+        "kind": "outputMul",
+        "node": "hive_hub",
+        "value": 0.4
+      },
+      "desc": "虫巢枢纽的全局加成 +40%/级。"
+    },
+    {
+      "id": "up_mir_a",
+      "name": "双生镜",
+      "cat": "node",
+      "target": "mirror_node",
+      "maxLevel": 5,
+      "cost": {
+        "spore": "91054",
+        "sclerotium": "146"
+      },
+      "growth": 1.34,
+      "effect": {
+        "kind": "outputMul",
+        "node": "mirror_node",
+        "value": 0.4
+      },
+      "desc": "镜像节点的复制比例 +40%/级。"
+    },
+    {
+      "id": "up_pac_a",
+      "name": "贸易代理",
+      "cat": "node",
+      "target": "pact_nest",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "1962",
+        "honeydew": "588"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": "pact_nest",
+        "value": 0.3
+      },
+      "desc": "契约巢产出 +25%/级。"
+    },
+    {
+      "id": "up_gen_a",
+      "name": "精密切割",
+      "cat": "node",
+      "target": "gene_splicer",
+      "maxLevel": 10,
+      "cost": {
+        "spore": "5457",
+        "pact": "243"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": "gene_splicer",
+        "value": 0.3
+      },
+      "desc": "基因剪接器产出 +25%/级。"
+    },
+    {
+      "id": "up_std_a",
+      "name": "静电筛",
+      "cat": "node",
+      "target": "stardust_collector",
+      "maxLevel": 10,
+      "cost": {
+        "deepmass": "15240"
+      },
+      "growth": 1.35,
+      "effect": {
+        "kind": "outputMul",
+        "node": "stardust_collector",
+        "value": 0.4
+      },
+      "desc": "星尘收集器产出 +40%/级。"
+    },
+    {
+      "id": "up_law_a",
+      "name": "法则密织",
+      "cat": "node",
+      "target": "law_loom",
+      "maxLevel": 10,
+      "cost": {
+        "stardust": "1500",
+        "deepmass": "60000"
+      },
+      "growth": 1.4,
+      "effect": {
+        "kind": "outputMul",
+        "node": "law_loom",
+        "value": 0.45
+      },
+      "desc": "法则织机产出 +45%/级。"
+    },
+    {
+      "id": "up_conn_a",
+      "name": "菌索粗化",
+      "cat": "node",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "spore": "2000",
+        "sugar": "1500"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "linkFlux",
+        "node": null,
+        "value": 0.25
+      },
+      "desc": "所有连线通量 +25%/级。"
+    },
+    {
+      "id": "up_conn_b",
+      "name": "信号中继网",
+      "cat": "node",
+      "target": null,
+      "maxLevel": 5,
+      "cost": {
+        "pheromone": "1500",
+        "sclerotium": "50"
+      },
+      "growth": 1.34,
+      "effect": {
+        "kind": "linkFlux",
+        "node": null,
+        "value": 0.5
+      },
+      "desc": "所有连线通量 +50%/级（后期主力）。"
+    },
+    {
+      "id": "up_g_mul_1",
+      "name": "菌丝网络 I",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "sugar": "100"
+      },
+      "growth": 1.2,
+      "effect": {
+        "kind": "outputMul",
+        "node": null,
+        "value": 0.05
+      },
+      "desc": "所有节点产出 +5%/级。"
+    },
+    {
+      "id": "up_g_mul_2",
+      "name": "菌丝网络 II",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "sugar": "8000",
+        "enzyme": "20"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "node": null,
+        "value": 0.06
+      },
+      "desc": "所有节点产出 +6%/级。"
+    },
+    {
+      "id": "up_g_mul_3",
+      "name": "菌丝网络 III",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "sugar": "200000",
+        "sclerotium": "5"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "node": null,
+        "value": 0.07
+      },
+      "desc": "所有节点产出 +7%/级。"
+    },
+    {
+      "id": "up_g_mul_4",
+      "name": "菌丝网络 IV",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "sugar": "9000000",
+        "sclerotium": "40",
+        "signal": "10"
+      },
+      "growth": 1.32,
+      "effect": {
+        "kind": "outputMul",
+        "node": null,
+        "value": 0.08
+      },
+      "desc": "所有节点产出 +8%/级。"
+    },
+    {
+      "id": "up_g_mul_5",
+      "name": "菌丝网络 V",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "deepmass": "5000",
+        "core": "20"
+      },
+      "growth": 1.36,
+      "effect": {
+        "kind": "outputMul",
+        "node": null,
+        "value": 0.1
+      },
+      "desc": "所有节点产出 +10%/级。"
+    },
+    {
+      "id": "up_g_cat",
+      "name": "酶催化效率",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 25,
+      "cost": {
+        "enzyme": "50"
+      },
+      "growth": 1.22,
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.02
+      },
+      "desc": "所有催化倍率 +0.02/级。"
+    },
+    {
+      "id": "up_g_build",
+      "name": "快速生长",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "spore": "200"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "buildSpeed",
+        "value": 0.08
+      },
+      "desc": "所有节点建造时间 −8%/级。"
+    },
+    {
+      "id": "up_g_cost",
+      "name": "精算生长",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 15,
+      "cost": {
+        "honeydew": "500"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "buildCostDiscount",
+        "node": null,
+        "value": 0.02
+      },
+      "desc": "所有建造成本 −2%/级（乘算，上限 −26%）。"
+    },
+    {
+      "id": "up_g_crit",
+      "name": "出芽暴击",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "sugar": "3000"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "critChance",
+        "value": 0.01
+      },
+      "desc": "出芽暴击概率 +1%/级（基础 0%）。"
+    },
+    {
+      "id": "up_g_critmul",
+      "name": "爆发式出芽",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 15,
+      "cost": {
+        "sugar": "12000",
+        "spore": "4000"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "critMul",
+        "value": 0.25
+      },
+      "desc": "暴击倍率 +25%/级（基础 200%）。"
+    },
+    {
+      "id": "up_g_flux",
+      "name": "菌丝套管",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "mineral": "2000"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "linkFlux",
+        "value": 0.1
+      },
+      "desc": "连线通量 +10%/级。"
+    },
+    {
+      "id": "up_g_off",
+      "name": "休眠代谢",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "sugar": "5000",
+        "water": "3000"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "offlineEfficiency",
+        "value": 0.05
+      },
+      "desc": "离线效率 +5%/级（基础 100%）。"
+    },
+    {
+      "id": "up_g_res",
+      "name": "细胞膜强化",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "sugar": "20000",
+        "water": "15000"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "eventResist",
+        "value": 0.03
+      },
+      "desc": "负面事件强度 −3%/级（上限 −60%）。"
+    },
+    {
+      "id": "up_g_fee",
+      "name": "菌市关系",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 5,
+      "cost": {
+        "honeydew": "2000"
+      },
+      "growth": 1.35,
+      "effect": {
+        "kind": "marketFee",
+        "value": -0.01
+      },
+      "desc": "市场手续费 −1%/级。"
+    },
+    {
+      "id": "up_g_spore",
+      "name": "孢子密度",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "spore": "3000"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "outputMul",
+        "res": "spore",
+        "value": 0.05
+      },
+      "desc": "所有孢子产出 +5%/级。"
+    },
+    {
+      "id": "up_g_repair",
+      "name": "菌丝修复",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "sugar": "1500",
+        "humus": "2000"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "richnessRepair",
+        "value": 0.05
+      },
+      "desc": "所有地块每秒修复 +0.05 富饶度。"
+    },
+    {
+      "id": "up_g_floor",
+      "name": "深根",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 15,
+      "cost": {
+        "humus": "5000",
+        "mineral": "2000"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "richnessFloor",
+        "value": 2
+      },
+      "desc": "枯竭下限 +2%（基础 35%）。"
+    },
+    {
+      "id": "up_g_pres",
+      "name": "基因表达",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 20,
+      "cost": {
+        "sporogene": "5"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "prestigeGain",
+        "value": 0.03
+      },
+      "desc": "孢子化收益 +3%/级。"
+    },
+    {
+      "id": "up_g_dep",
+      "name": "节俭采掘",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 15,
+      "cost": {
+        "sugar": "2500",
+        "mineral": "1200"
+      },
+      "growth": 1.24,
+      "effect": {
+        "kind": "depletionReduce",
+        "node": null,
+        "value": 0.04
+      },
+      "desc": "所有采掘节点对土壤的伤害 −4%/级。"
+    },
+    {
+      "id": "up_g_enzyme",
+      "name": "催化节流",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 15,
+      "cost": {
+        "enzyme": "200"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "inputDiscount",
+        "node": null,
+        "value": 0.03
+      },
+      "desc": "所有配方的酶消耗 −3%/级。"
+    },
+    {
+      "id": "up_g_tox",
+      "name": "毒素耐受",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "toxin": "300"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "eventResist",
+        "value": 0.02
+      },
+      "desc": "毒素自伤 −8%/级，并计入事件抗性。"
+    },
+    {
+      "id": "up_g_deep",
+      "name": "深层肌肉",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 15,
+      "cost": {
+        "sclerotium": "10"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "class": "special",
+        "value": 0.05
+      },
+      "desc": "特殊类节点（晶格/核心/深钻/枢纽/镜像）产出 +5%/级。"
+    },
+    {
+      "id": "up_g_signal",
+      "name": "神经纤维",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "pheromone": "2000"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "signal_node",
+        "value": 0.06
+      },
+      "desc": "电信号产出 +6%/级。"
+    },
+    {
+      "id": "up_g_gene",
+      "name": "片段稳定",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "gene": "20"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "gene_splicer",
+        "value": 0.06
+      },
+      "desc": "基因片段产出 +6%/级。"
+    },
+    {
+      "id": "up_g_pact",
+      "name": "信誉累积",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "pact": "300"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "pact_nest",
+        "value": 0.06
+      },
+      "desc": "契约点产出 +6%/级。"
+    },
+    {
+      "id": "up_g_auto",
+      "name": "脉动加速",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "pheromone": "500"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "outputMul",
+        "node": null,
+        "value": 0.03
+      },
+      "desc": "自动化每秒多做一件事（同时给全局产出 +3%/级）。"
+    },
+    {
+      "id": "up_g_rule",
+      "name": "规则分层",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 2,
+      "cost": {
+        "pheromone": "8000",
+        "signal": "50"
+      },
+      "growth": 1.6,
+      "effect": {
+        "kind": "ruleSlot",
+        "value": 1
+      },
+      "desc": "自动化规则槽 +1。"
+    },
+    {
+      "id": "up_g_honey",
+      "name": "蜜露提纯",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 15,
+      "cost": {
+        "honeydew": "3000"
+      },
+      "growth": 1.26,
+      "effect": {
+        "kind": "outputMul",
+        "res": "honeydew",
+        "value": 0.04
+      },
+      "desc": "蜜露产出 +4%/级。"
+    },
+    {
+      "id": "up_g_harvest",
+      "name": "协作采收",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 15,
+      "cost": {
+        "sugar": "20000",
+        "honeydew": "1500"
+      },
+      "growth": 1.28,
+      "effect": {
+        "kind": "outputMul",
+        "class": "symbiont",
+        "value": 0.04
+      },
+      "desc": "共生类节点产出 +4%/级。"
+    },
+    {
+      "id": "up_g_mirror",
+      "name": "镜面抛光",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "sclerotium": "150"
+      },
+      "growth": 1.3,
+      "effect": {
+        "kind": "outputMul",
+        "node": "mirror_node",
+        "value": 0.05
+      },
+      "desc": "镜像效率 +5%/级。"
+    },
+    {
+      "id": "up_g_star",
+      "name": "尘埃吸附",
+      "cat": "global",
+      "target": null,
+      "maxLevel": 10,
+      "cost": {
+        "deepmass": "15240"
+      },
+      "growth": 1.32,
+      "effect": {
+        "kind": "outputMul",
+        "node": "stardust_collector",
+        "value": 0.06
+      },
+      "desc": "星尘产出 +6%/级。"
+    },
+    {
+      "id": "up_m_bidir",
+      "name": "双向配方",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "enzyme": "500",
+        "sclerotium": "3"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "recipe_bidirectional"
+      },
+      "desc": "解锁有损双向配方：糖↔酶、水↔腐殖质。"
+    },
+    {
+      "id": "up_m_cycle",
+      "name": "环状网络",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "signal": "20",
+        "sclerotium": "25"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "graph_cycles"
+      },
+      "desc": "允许连线成环（结算按拓扑序分层，环内资源按上一 tick 值计算）。"
+    },
+    {
+      "id": "up_m_nodelay",
+      "name": "零延迟菌丝",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "pheromone": "3000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "link_zero_delay"
+      },
+      "desc": "连线不再有传播延迟。"
+    },
+    {
+      "id": "up_m_2ndcat",
+      "name": "二阶催化",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "enzyme": "5000",
+        "signal": "10"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "catalyst_second_order"
+      },
+      "desc": "催化倍率取前两条入边的乘算组合，而不是最大值。"
+    },
+    {
+      "id": "up_m_timezip",
+      "name": "时间压缩",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "sclerotium": "60",
+        "signal": "40"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "time_compress"
+      },
+      "desc": "解锁 2× 时间压缩开关（产量翻倍但土壤消耗也翻倍）。"
+    },
+    {
+      "id": "up_m_timebank",
+      "name": "时间银行",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "core": "10",
+        "sclerotium": "100"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "time_bank"
+      },
+      "desc": "可储存最多 8 小时产量，随时取出。"
+    },
+    {
+      "id": "up_m_reverse",
+      "name": "逆熵生产",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "core": "30",
+        "law": "1"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "entropy_reverse"
+      },
+      "desc": "部分配方可反向运行（产物变原料，效率 60%）。"
+    },
+    {
+      "id": "up_m_overload",
+      "name": "过载",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "toxin": "10000",
+        "signal": "60"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "overload"
+      },
+      "desc": "节点可超载至 150% 通量，但过热会损伤土壤与节点。"
+    },
+    {
+      "id": "up_m_copy",
+      "name": "资源复制",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "sclerotium": "200",
+        "core": "15"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "resource_copy"
+      },
+      "desc": "5% 概率复制一次产出（可被 Combo 提升）。"
+    },
+    {
+      "id": "up_m_autolink",
+      "name": "菌丝协同",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "pheromone": "6000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "outputMul",
+        "node": null,
+        "value": 0.05
+      },
+      "desc": "网络越密，养分转运越省力：全局产出 +5%。"
+    },
+    {
+      "id": "up_m_autotune",
+      "name": "调优本能",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "pheromone": "20000",
+        "signal": "100"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "catalystBonus",
+        "value": 0.04
+      },
+      "desc": "自动优化每次多尝试一个候选上游，全局催化 +4%。"
+    },
+    {
+      "id": "up_m_autospore",
+      "name": "孢子节律",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "sporogene": "250"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "prestigeGain",
+        "value": 0.1
+      },
+      "desc": "自动孢子化的阈值可精确到 0.1，孢子化收益 +10%。"
+    },
+    {
+      "id": "up_m_rules",
+      "name": "规则引擎",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "pheromone": "50000",
+        "signal": "300"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "rule_engine"
+      },
+      "desc": "解锁 IF/THEN 规则编辑器（初始 3 槽）。"
+    },
+    {
+      "id": "up_m_season",
+      "name": "季节轮转",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "core": "50",
+        "gene": "50"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "seasons"
+      },
+      "desc": "解锁四季：每个季节改写一组全局配方效率。"
+    },
+    {
+      "id": "up_m_parallel",
+      "name": "平行网络",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "law": "3",
+        "stardust": "300"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "parallel_net"
+      },
+      "desc": "解锁第二张可切换的网络图。"
+    },
+    {
+      "id": "up_m_pactslot",
+      "name": "条款扩槽",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "pact": "800",
+        "honeydew": "20000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "pact_slots"
+      },
+      "desc": "契约槽 +2，条款自由度提升。"
+    },
+    {
+      "id": "up_m_amnesty",
+      "name": "违约豁免",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "pact": "2000",
+        "honeydew": "50000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "pact_amnesty"
+      },
+      "desc": "每 24 小时可豁免一次契约违约。"
+    },
+    {
+      "id": "up_m_scan",
+      "name": "生态扫描",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "signal": "150",
+        "pheromone": "30000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "eco_scan"
+      },
+      "desc": "解锁地块富饶度与隐藏资源的热力图视图。"
+    },
+    {
+      "id": "up_m_blueprint",
+      "name": "网络蓝图",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "pheromone": "12000",
+        "sclerotium": "15"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "blueprint"
+      },
+      "desc": "可保存/载入最多 5 套网络布局，孢子化后一键重建。"
+    },
+    {
+      "id": "up_m_marketbot",
+      "name": "菌市机器人",
+      "cat": "mechanic",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "honeydew": "30000",
+        "signal": "30"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "market_bot"
+      },
+      "desc": "按玩家设定的价格区间自动买卖。"
+    },
+    {
+      "id": "up_h_void",
+      "name": "虚空注射",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "voidspore": "1"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "void_layer"
+      },
+      "desc": "解锁隐藏基质层『虚空菌床』：节点上限 +30，产出 ×5，但会吸引未知事件。"
+    },
+    {
+      "id": "up_h_eye",
+      "name": "腐殖之眼",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "spore": "1000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "richnessRepair",
+        "value": 0.5
+      },
+      "desc": "在最贫瘠的地块存活过的人都懂了：修复 +0.5/秒（隐藏升级，条件达成后出现）。"
+    },
+    {
+      "id": "up_h_echo",
+      "name": "回声共鸣",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "echo": "1"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "echo_system"
+      },
+      "desc": "解锁『共生回声』：每局开局随机继承上局的一条催化规则。"
+    },
+    {
+      "id": "up_h_loststrain",
+      "name": "失落菌株",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "gene": "500",
+        "strain": "1"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "strain_lost"
+      },
+      "desc": "解锁隐藏菌株『无名者』：没有任何加成，但有 10% 概率触发双倍孢子化收益。"
+    },
+    {
+      "id": "up_h_whisper",
+      "name": "深菌低语",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "deepmass": "100000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "deep_recipe"
+      },
+      "desc": "解锁深菌质专属配方：深菌质 → 核心（效率 3×，但每 10 分钟引发一次深震）。"
+    },
+    {
+      "id": "up_h_index",
+      "name": "星尘索引",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "stardust": "1000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "stardust_index"
+      },
+      "desc": "解锁星尘图鉴第 5 页：显示所有隐藏内容的模糊线索。"
+    },
+    {
+      "id": "up_h_silence",
+      "name": "沉默协议",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "pact": "1"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "silent_pact"
+      },
+      "desc": "不与任何物种签约达 2 小时可获得：契约点 ×2 但无法使用菌市。"
+    },
+    {
+      "id": "up_h_solo",
+      "name": "独行者",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "spore": "50000"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "solo_class"
+      },
+      "desc": "只用一种节点类完成第一次孢子化：该类产出永久 ×1.5。"
+    },
+    {
+      "id": "up_h_circle",
+      "name": "完美的圆",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "sclerotium": "500"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "perfect_cycle"
+      },
+      "desc": "网络中存在 100 条以上的环：环上所有节点产出 +50%。"
+    },
+    {
+      "id": "up_h_secondline",
+      "name": "第二条时间线",
+      "cat": "hidden",
+      "target": null,
+      "maxLevel": 1,
+      "cost": {
+        "law": "5",
+        "echo": "2"
+      },
+      "growth": 1,
+      "effect": {
+        "kind": "unlock",
+        "value": "second_timeline"
+      },
+      "desc": "解锁『回溯存档点』：可回退到本轮孢子化前的任意一次自动存档。"
+    }
+  ]
+}

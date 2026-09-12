@@ -1,0 +1,1502 @@
+{
+  "tableVersion": 1,
+  "layers": [
+    {
+      "id": "topsoil",
+      "name": "表土层",
+      "nameEn": "Topsoil",
+      "order": 0,
+      "richnessBase": 70,
+      "richnessFloor": 8,
+      "nodeCap": 45,
+      "depthMul": "1",
+      "unlock": {
+        "type": "start"
+      },
+      "desc": "有机质最丰富的浅层。生长快，也最容易被你抽干。"
+    },
+    {
+      "id": "aquifer",
+      "name": "含水层",
+      "nameEn": "Aquifer",
+      "order": 1,
+      "richnessBase": 85,
+      "richnessFloor": 25,
+      "nodeCap": 60,
+      "depthMul": "3",
+      "unlock": {
+        "type": "resource",
+        "resource": "water",
+        "amount": "400"
+      },
+      "desc": "水在这里几乎是免费的，光也还透得进来——共生流的摇篮。"
+    },
+    {
+      "id": "lode",
+      "name": "矿脉层",
+      "nameEn": "Lode",
+      "order": 2,
+      "richnessBase": 55,
+      "richnessFloor": 30,
+      "nodeCap": 75,
+      "depthMul": "12",
+      "unlock": {
+        "type": "resource",
+        "resource": "mineral",
+        "amount": "1200"
+      },
+      "desc": "菌丝酸蚀岩壁取出的矿脉。慢，但永不枯竭。"
+    },
+    {
+      "id": "bedrock",
+      "name": "岩层",
+      "nameEn": "Bedrock",
+      "order": 3,
+      "richnessBase": 40,
+      "richnessFloor": 20,
+      "nodeCap": 90,
+      "depthMul": "60",
+      "unlock": {
+        "type": "resource",
+        "resource": "sclerotium",
+        "amount": "15"
+      },
+      "desc": "压力与黑暗同时上升。电信号只能在这种密度下传播。"
+    },
+    {
+      "id": "mantle",
+      "name": "深菌地幔",
+      "nameEn": "Deep Mantle",
+      "order": 4,
+      "richnessBase": 90,
+      "richnessFloor": 45,
+      "nodeCap": 110,
+      "depthMul": "400",
+      "unlock": {
+        "type": "resource",
+        "resource": "core",
+        "amount": "5"
+      },
+      "desc": "上古生态的残骸沉积层。它记得这颗星球上一次被播种。"
+    },
+    {
+      "id": "voidbed",
+      "name": "虚空菌床",
+      "nameEn": "Void Bed",
+      "order": 5,
+      "richnessBase": 120,
+      "richnessFloor": 60,
+      "nodeCap": 12,
+      "depthMul": "5",
+      "unlock": {
+        "type": "resource",
+        "resource": "voidspore",
+        "amount": "1"
+      },
+      "desc": "不该存在的一层。你在最贫瘠的地方活了下来，于是土壤裂开了一道缝 —— 缝里长着不该长出来的菌丝。"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "decomposer_i",
+      "name": "分解丝 I",
+      "nameEn": "Decomposer I",
+      "class": "extractor",
+      "catalystTag": "fresh",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "5"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 1,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "humus": "0.5"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0.06
+      },
+      "unlock": {
+        "type": "start"
+      },
+      "upgradableTo": "decomposer_ii",
+      "desc": "最初的那根菌丝。它啃食一切柔软的东西，并且从不休息。"
+    },
+    {
+      "id": "decomposer_ii",
+      "name": "分解丝 II",
+      "nameEn": "Decomposer II",
+      "class": "extractor",
+      "catalystTag": "fresh",
+      "tier": 2,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "60",
+        "sugar": "40",
+        "enzyme": "5"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 3,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "humus": "6"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0.35
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "humus",
+        "amount": "120"
+      },
+      "upgradableTo": "decomposer_iii",
+      "desc": "带分支的消化结构，一次进食可以覆盖一整个腐殖层。"
+    },
+    {
+      "id": "decomposer_iii",
+      "name": "分解丝 III",
+      "nameEn": "Decomposer III",
+      "class": "extractor",
+      "catalystTag": "fresh",
+      "tier": 3,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "900",
+        "sugar": "600",
+        "enzyme": "80",
+        "sclerotium": "2"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 8,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "humus": "80"
+        },
+        "enzymePerSec": "0",
+        "depletion": 1.4
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "humus",
+        "amount": "12000"
+      },
+      "upgradableTo": null,
+      "desc": "一整片菌丝胃。它能在一分钟内抹平一块土壤的全部历史。"
+    },
+    {
+      "id": "borer_i",
+      "name": "掘进菌柄 I",
+      "nameEn": "Borer I",
+      "class": "extractor",
+      "catalystTag": "ionic",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "12",
+        "sugar": "5"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 2,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "mineral": "1.5"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0.01
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "humus",
+        "amount": "25"
+      },
+      "upgradableTo": "borer_ii",
+      "desc": "缓慢地分泌酸液，把岩石磨成可吸收的离子。慢是你的常态。"
+    },
+    {
+      "id": "borer_ii",
+      "name": "掘进菌柄 II",
+      "nameEn": "Borer II",
+      "class": "extractor",
+      "catalystTag": "ionic",
+      "tier": 2,
+      "layer": "lode",
+      "cost": {
+        "spore": "150",
+        "sugar": "100",
+        "sclerotium": "1"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 4,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "mineral": "18"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0.02
+      },
+      "unlock": {
+        "type": "layer",
+        "layer": "lode"
+      },
+      "upgradableTo": "borer_iii",
+      "desc": "带压力腔的钻头结构，第一次让你觉得岩石其实很软。"
+    },
+    {
+      "id": "borer_iii",
+      "name": "掘进菌柄 III",
+      "nameEn": "Borer III",
+      "class": "extractor",
+      "catalystTag": "ionic",
+      "tier": 3,
+      "layer": "lode",
+      "cost": {
+        "spore": "2000",
+        "sugar": "1500",
+        "sclerotium": "10",
+        "signal": "2"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 10,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "mineral": "220"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0.03
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "mineral",
+        "amount": "9000"
+      },
+      "upgradableTo": null,
+      "desc": "由电信号协调的钻场阵列。矿脉在它面前像糖一样溶化。"
+    },
+    {
+      "id": "hydra_i",
+      "name": "吸水菌丝 I",
+      "nameEn": "Hydra I",
+      "class": "extractor",
+      "catalystTag": "hydraulic",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "8"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 1,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "water": "0.8"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0.03
+      },
+      "unlock": {
+        "type": "start"
+      },
+      "upgradableTo": "hydra_ii",
+      "desc": "向土壤深处伸展的吸水须。它是所有反应的前提。"
+    },
+    {
+      "id": "hydra_ii",
+      "name": "吸水菌丝 II",
+      "nameEn": "Hydra II",
+      "class": "extractor",
+      "catalystTag": "hydraulic",
+      "tier": 2,
+      "layer": "aquifer",
+      "cost": {
+        "spore": "90",
+        "sugar": "60"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 3,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "water": "9"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0.05
+      },
+      "unlock": {
+        "type": "layer",
+        "layer": "aquifer"
+      },
+      "upgradableTo": "hydra_iii",
+      "desc": "一层毛细管网，把地下水的毛细上升变成稳定的输水干道。"
+    },
+    {
+      "id": "hydra_iii",
+      "name": "吸水菌丝 III",
+      "nameEn": "Hydra III",
+      "class": "extractor",
+      "catalystTag": "hydraulic",
+      "tier": 3,
+      "layer": "aquifer",
+      "cost": {
+        "spore": "1200",
+        "sugar": "900",
+        "enzyme": "50"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 8,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "water": "120"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0.08
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "water",
+        "amount": "9000"
+      },
+      "upgradableTo": null,
+      "desc": "直接插入潜水层的泵送结构。它能把整条地下河搬进你的身体。"
+    },
+    {
+      "id": "photoreceptor_i",
+      "name": "感光菌帽 I",
+      "nameEn": "Photoreceptor I",
+      "class": "extractor",
+      "catalystTag": "luminous",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "10",
+        "sugar": "8"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 2,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "light": "0.3"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "modulatedBy": "daynight"
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "sugar",
+        "amount": "5"
+      },
+      "upgradableTo": "photoreceptor_ii",
+      "desc": "顶出地表的菌帽。昼开夜合——你第一次意识到地表有节奏。"
+    },
+    {
+      "id": "photoreceptor_ii",
+      "name": "感光菌帽 II",
+      "nameEn": "Photoreceptor II",
+      "class": "extractor",
+      "catalystTag": "luminous",
+      "tier": 2,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "120",
+        "sugar": "90"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 4,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "light": "4"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "modulatedBy": "daynight"
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "light",
+        "amount": "30"
+      },
+      "upgradableTo": "photoreceptor_iii",
+      "desc": "成片的感光冠层，即使阴天也能榨出可用的光子。"
+    },
+    {
+      "id": "photoreceptor_iii",
+      "name": "感光菌帽 III",
+      "nameEn": "Photoreceptor III",
+      "class": "extractor",
+      "catalystTag": "luminous",
+      "tier": 3,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "1600",
+        "sugar": "1200",
+        "sclerotium": "5"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 9,
+      "recipe": {
+        "inputs": {},
+        "outputs": {
+          "light": "50"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "modulatedBy": "daynight"
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "light",
+        "amount": "1500"
+      },
+      "upgradableTo": null,
+      "desc": "一整片蘑菇森林。维兰人开始把这些发光的冠层当作神迹。"
+    },
+    {
+      "id": "saccharifier_i",
+      "name": "糖化腔 I",
+      "nameEn": "Saccharifier I",
+      "class": "metabolizer",
+      "catalystTag": "cascade",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "12"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 2,
+      "recipe": {
+        "inputs": {
+          "humus": "1.2",
+          "water": "0.2"
+        },
+        "outputs": {
+          "sugar": "1.5"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "water",
+        "amount": "3"
+      },
+      "upgradableTo": "saccharifier_ii",
+      "desc": "把腐殖质水解成糖的腔体。你的第一口甜味。"
+    },
+    {
+      "id": "saccharifier_ii",
+      "name": "糖化腔 II",
+      "nameEn": "Saccharifier II",
+      "class": "metabolizer",
+      "catalystTag": "cascade",
+      "tier": 2,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "130",
+        "sugar": "80",
+        "enzyme": "4"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 4,
+      "recipe": {
+        "inputs": {
+          "humus": "20",
+          "water": "3"
+        },
+        "outputs": {
+          "sugar": "14"
+        },
+        "enzymePerSec": "0.2",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "sugar",
+        "amount": "400"
+      },
+      "upgradableTo": "saccharifier_iii",
+      "desc": "多级水解槽。酶在这里第一次成为消耗品而不是装饰。"
+    },
+    {
+      "id": "saccharifier_iii",
+      "name": "糖化腔 III",
+      "nameEn": "Saccharifier III",
+      "class": "metabolizer",
+      "catalystTag": "cascade",
+      "tier": 3,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "1800",
+        "sugar": "1400",
+        "enzyme": "60",
+        "sclerotium": "3"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 9,
+      "recipe": {
+        "inputs": {
+          "humus": "200",
+          "water": "40"
+        },
+        "outputs": {
+          "sugar": "200"
+        },
+        "enzymePerSec": "3",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "sugar",
+        "amount": "32000"
+      },
+      "upgradableTo": null,
+      "desc": "工业级糖化反应堆。它吃掉的腐殖质以吨计，吐出的糖以河计。"
+    },
+    {
+      "id": "enzyme_gland_i",
+      "name": "酶腺 I",
+      "nameEn": "Enzyme Gland I",
+      "class": "metabolizer",
+      "catalystTag": "cascade",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "25",
+        "sugar": "20"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 2,
+      "recipe": {
+        "inputs": {
+          "sugar": "3"
+        },
+        "outputs": {
+          "enzyme": "0.4"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "sugar",
+        "amount": "60"
+      },
+      "upgradableTo": "enzyme_gland_ii",
+      "desc": "分泌胞外酶的腺体。催化流的起点，也是最容易亏本的地方。"
+    },
+    {
+      "id": "enzyme_gland_ii",
+      "name": "酶腺 II",
+      "nameEn": "Enzyme Gland II",
+      "class": "metabolizer",
+      "catalystTag": "cascade",
+      "tier": 2,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "220",
+        "sugar": "180",
+        "sclerotium": "1"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 4,
+      "recipe": {
+        "inputs": {
+          "sugar": "30"
+        },
+        "outputs": {
+          "enzyme": "5"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "enzyme",
+        "amount": "40"
+      },
+      "upgradableTo": "enzyme_gland_iii",
+      "desc": "层叠的分泌板。酶第一次多到可以用来浪费。"
+    },
+    {
+      "id": "enzyme_gland_iii",
+      "name": "酶腺 III",
+      "nameEn": "Enzyme Gland III",
+      "class": "metabolizer",
+      "catalystTag": "cascade",
+      "tier": 3,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "2600",
+        "sugar": "2200",
+        "sclerotium": "8"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 9,
+      "recipe": {
+        "inputs": {
+          "sugar": "300"
+        },
+        "outputs": {
+          "enzyme": "70"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "enzyme",
+        "amount": "2200"
+      },
+      "upgradableTo": null,
+      "desc": "一整座酶工厂。它的副产物腐蚀一切，包括你的耐心。"
+    },
+    {
+      "id": "toxin_gland_i",
+      "name": "毒素腺 I",
+      "nameEn": "Toxin Gland I",
+      "class": "metabolizer",
+      "catalystTag": "volatile",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "40",
+        "sugar": "35"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 3,
+      "recipe": {
+        "inputs": {
+          "sugar": "4",
+          "mineral": "1"
+        },
+        "outputs": {
+          "toxin": "0.3"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "mineral",
+        "amount": "20"
+      },
+      "upgradableTo": "toxin_gland_ii",
+      "desc": "第一件武器。它对邻居同样不友好——别把它接在你的糖化腔上。"
+    },
+    {
+      "id": "toxin_gland_ii",
+      "name": "毒素腺 II",
+      "nameEn": "Toxin Gland II",
+      "class": "metabolizer",
+      "catalystTag": "volatile",
+      "tier": 2,
+      "layer": "lode",
+      "cost": {
+        "spore": "350",
+        "sugar": "300",
+        "sclerotium": "2"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 5,
+      "recipe": {
+        "inputs": {
+          "sugar": "40",
+          "mineral": "10"
+        },
+        "outputs": {
+          "toxin": "4"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "toxin",
+        "amount": "30"
+      },
+      "upgradableTo": "toxin_gland_iii",
+      "desc": "加压毒囊。寄生流用它撬开维兰人的粮仓。"
+    },
+    {
+      "id": "toxin_gland_iii",
+      "name": "毒素腺 III",
+      "nameEn": "Toxin Gland III",
+      "class": "metabolizer",
+      "catalystTag": "volatile",
+      "tier": 3,
+      "layer": "lode",
+      "cost": {
+        "spore": "4000",
+        "sugar": "3500",
+        "sclerotium": "12"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 10,
+      "recipe": {
+        "inputs": {
+          "sugar": "400",
+          "mineral": "100"
+        },
+        "outputs": {
+          "toxin": "55"
+        },
+        "enzymePerSec": "2",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "toxin",
+        "amount": "800"
+      },
+      "upgradableTo": null,
+      "desc": "生化武器库。当它全力运转时，整片土壤会变成禁区。"
+    },
+    {
+      "id": "sporangium_i",
+      "name": "孢子囊 I",
+      "nameEn": "Sporangium I",
+      "class": "sporifier",
+      "catalystTag": "prolific",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "25",
+        "sugar": "30"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 3,
+      "recipe": {
+        "inputs": {
+          "sugar": "2.5",
+          "water": "0.6"
+        },
+        "outputs": {
+          "spore": "2"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "sugar",
+        "amount": "40"
+      },
+      "upgradableTo": "sporangium_ii",
+      "desc": "第一次闭合并释放孢子。至此你终于能自己长大，而不是等别人喂。"
+    },
+    {
+      "id": "sporangium_ii",
+      "name": "孢子囊 II",
+      "nameEn": "Sporangium II",
+      "class": "sporifier",
+      "catalystTag": "prolific",
+      "tier": 2,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "260",
+        "sugar": "240",
+        "enzyme": "10"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 5,
+      "recipe": {
+        "inputs": {
+          "sugar": "30",
+          "water": "8"
+        },
+        "outputs": {
+          "spore": "26"
+        },
+        "enzymePerSec": "0.1",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "spore",
+        "amount": "300"
+      },
+      "upgradableTo": "sporangium_iii",
+      "desc": "带弹射机制的孢子床。扩张速度第一次追上你的野心。"
+    },
+    {
+      "id": "sporangium_iii",
+      "name": "孢子囊 III",
+      "nameEn": "Sporangium III",
+      "class": "sporifier",
+      "catalystTag": "prolific",
+      "tier": 3,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "3000",
+        "sugar": "2800",
+        "enzyme": "90",
+        "sclerotium": "4"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 9,
+      "recipe": {
+        "inputs": {
+          "sugar": "400",
+          "water": "80"
+        },
+        "outputs": {
+          "spore": "400"
+        },
+        "enzymePerSec": "1.5",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "spore",
+        "amount": "12000"
+      },
+      "upgradableTo": null,
+      "desc": "工业化孢子生产线。孢子在管道里像雪一样堆积。"
+    },
+    {
+      "id": "algae_i",
+      "name": "藻类共生体 I",
+      "nameEn": "Algae Symbiont I",
+      "class": "symbiont",
+      "catalystTag": "symbiotic",
+      "tier": 1,
+      "layer": "aquifer",
+      "cost": {
+        "spore": "60",
+        "sugar": "50"
+      },
+      "costGrowth": 1.14,
+      "buildTime": 4,
+      "recipe": {
+        "inputs": {
+          "light": "1",
+          "water": "1"
+        },
+        "outputs": {
+          "sugar": "1.5",
+          "honeydew": "0.02"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "modulatedBy": "daynight"
+      },
+      "unlock": {
+        "type": "layer",
+        "layer": "aquifer"
+      },
+      "upgradableTo": "algae_ii",
+      "desc": "你包住一颗藻类，它替你光合，你替它抵挡黑暗。第一次真正的共生。"
+    },
+    {
+      "id": "algae_ii",
+      "name": "藻类共生体 II",
+      "nameEn": "Algae Symbiont II",
+      "class": "symbiont",
+      "catalystTag": "symbiotic",
+      "tier": 2,
+      "layer": "aquifer",
+      "cost": {
+        "spore": "700",
+        "sugar": "600",
+        "gene": "1"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 6,
+      "recipe": {
+        "inputs": {
+          "light": "10",
+          "water": "10"
+        },
+        "outputs": {
+          "sugar": "18",
+          "honeydew": "0.3"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "modulatedBy": "daynight"
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "honeydew",
+        "amount": "20"
+      },
+      "upgradableTo": "algae_iii",
+      "desc": "共生的藻群已经会按照你的节律呼吸。蜜露开始稳定流出。"
+    },
+    {
+      "id": "algae_iii",
+      "name": "藻类共生体 III",
+      "nameEn": "Algae Symbiont III",
+      "class": "symbiont",
+      "catalystTag": "symbiotic",
+      "tier": 3,
+      "layer": "aquifer",
+      "cost": {
+        "spore": "8000",
+        "sugar": "7000",
+        "gene": "5",
+        "sclerotium": "5"
+      },
+      "costGrowth": 1.28,
+      "buildTime": 12,
+      "recipe": {
+        "inputs": {
+          "light": "100",
+          "water": "100"
+        },
+        "outputs": {
+          "sugar": "220",
+          "honeydew": "5"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "modulatedBy": "daynight"
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "honeydew",
+        "amount": "400"
+      },
+      "upgradableTo": null,
+      "desc": "一整片地下藻海。你是它唯一的潮汐。"
+    },
+    {
+      "id": "pheromone_gland",
+      "name": "信息素腺",
+      "nameEn": "Pheromone Gland",
+      "class": "transmitter",
+      "catalystTag": "neural",
+      "tier": 2,
+      "layer": "aquifer",
+      "cost": {
+        "spore": "800",
+        "sugar": "700",
+        "gene": "2"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 6,
+      "recipe": {
+        "inputs": {
+          "sugar": "20",
+          "spore": "1"
+        },
+        "outputs": {
+          "pheromone": "0.2"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "gene",
+        "amount": "1"
+      },
+      "upgradableTo": null,
+      "desc": "网络的喉咙。它产出的每个分子都在说：往这边长。"
+    },
+    {
+      "id": "signal_node",
+      "name": "电信号节点",
+      "nameEn": "Signal Node",
+      "class": "transmitter",
+      "catalystTag": "neural",
+      "tier": 3,
+      "layer": "bedrock",
+      "cost": {
+        "spore": "3000",
+        "pheromone": "200",
+        "sclerotium": "5"
+      },
+      "costGrowth": 1.26,
+      "buildTime": 10,
+      "recipe": {
+        "inputs": {
+          "pheromone": "5"
+        },
+        "outputs": {
+          "signal": "0.1"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "layer",
+        "layer": "bedrock"
+      },
+      "requires": {
+        "connectivity": 12
+      },
+      "upgradableTo": null,
+      "desc": "菌丝里的动作电位。只有当网络足够密，电流才会自己找到路。"
+    },
+    {
+      "id": "relay",
+      "name": "中继",
+      "nameEn": "Relay",
+      "class": "transmitter",
+      "catalystTag": "neural",
+      "tier": 3,
+      "layer": "bedrock",
+      "cost": {
+        "spore": "1500",
+        "sclerotium": "3"
+      },
+      "costGrowth": 1.24,
+      "buildTime": 5,
+      "recipe": {
+        "inputs": {},
+        "outputs": {},
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "structural": {
+          "linkFluxMul": 1.5
+        }
+      },
+      "unlock": {
+        "type": "layer",
+        "layer": "bedrock"
+      },
+      "upgradableTo": null,
+      "desc": "不加产出的节点。它只是让线更粗——但拓扑流知道这有多值钱。"
+    },
+    {
+      "id": "gluconeogen",
+      "name": "糖异生腔",
+      "nameEn": "Gluconeogenesis Chamber",
+      "class": "metabolizer",
+      "catalystTag": "cascade",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "300",
+        "sugar": "200",
+        "enzyme": "20"
+      },
+      "costGrowth": 1.24,
+      "buildTime": 4,
+      "recipe": {
+        "inputs": {
+          "enzyme": "4",
+          "water": "2"
+        },
+        "outputs": {
+          "sugar": "2"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "enzyme",
+        "amount": "50"
+      },
+      "upgradableTo": null,
+      "desc": "把酶拆回糖。效率只有一半，但这是你第一次拥有回头路——有损双向的第一环。"
+    },
+    {
+      "id": "humus_synth",
+      "name": "腐殖合成腔",
+      "nameEn": "Humus Synthesis Chamber",
+      "class": "metabolizer",
+      "catalystTag": "fresh",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "500",
+        "sugar": "400"
+      },
+      "costGrowth": 1.24,
+      "buildTime": 5,
+      "recipe": {
+        "inputs": {
+          "sugar": "8",
+          "mineral": "4"
+        },
+        "outputs": {
+          "humus": "12"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "sugar",
+        "amount": "800"
+      },
+      "upgradableTo": null,
+      "desc": "用糖和矿物盐重新合成腐殖质。土壤是可以被喂饱的——只要你愿意付出代价。"
+    },
+    {
+      "id": "spore_hydrolysis",
+      "name": "孢子水解腔",
+      "nameEn": "Spore Hydrolysis Chamber",
+      "class": "metabolizer",
+      "catalystTag": "prolific",
+      "tier": 1,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "400",
+        "sugar": "300"
+      },
+      "costGrowth": 1.24,
+      "buildTime": 5,
+      "recipe": {
+        "inputs": {
+          "spore": "20",
+          "water": "10"
+        },
+        "outputs": {
+          "sugar": "12"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "spore",
+        "amount": "200"
+      },
+      "upgradableTo": null,
+      "desc": "把多余的孢子水解回糖。紧急时刻的储备粮，也是 sugar→spore→sugar 这条环路的另一半。"
+    },
+    {
+      "id": "sclerotium_press",
+      "name": "菌核压机",
+      "nameEn": "Sclerotium Press",
+      "class": "special",
+      "catalystTag": "deep",
+      "tier": 3,
+      "layer": "lode",
+      "cost": {
+        "spore": "1500",
+        "sugar": "1200",
+        "enzyme": "60"
+      },
+      "costGrowth": 1.3,
+      "buildTime": 12,
+      "recipe": {
+        "inputs": {
+          "mineral": "20",
+          "enzyme": "2"
+        },
+        "outputs": {
+          "sclerotium": "0.05"
+        },
+        "enzymePerSec": "1",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "enzyme",
+        "amount": "500"
+      },
+      "upgradableTo": null,
+      "desc": "在高压下把矿物离子压成晶格。你第一次产出「不可再生」的东西。"
+    },
+    {
+      "id": "core_chamber",
+      "name": "核心腔",
+      "nameEn": "Core Chamber",
+      "class": "special",
+      "catalystTag": "deep",
+      "tier": 3,
+      "layer": "lode",
+      "cost": {
+        "spore": "6000",
+        "sclerotium": "10",
+        "enzyme": "200"
+      },
+      "costGrowth": 1.32,
+      "buildTime": 20,
+      "recipe": {
+        "inputs": {
+          "sclerotium": "0.5",
+          "enzyme": "10"
+        },
+        "outputs": {
+          "core": "0.02"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "sclerotium",
+        "amount": "5"
+      },
+      "requires": {
+        "richness": 60
+      },
+      "upgradableTo": null,
+      "desc": "晶格与电流在健康土壤上交汇的地方。孢子化的门票在这里被打出来。"
+    },
+    {
+      "id": "deep_drill",
+      "name": "深菌钻",
+      "nameEn": "Deep Drill",
+      "class": "special",
+      "catalystTag": "deep",
+      "tier": 3,
+      "layer": "mantle",
+      "cost": {
+        "spore": "20000",
+        "sclerotium": "60",
+        "core": "5"
+      },
+      "costGrowth": 1.32,
+      "buildTime": 24,
+      "recipe": {
+        "inputs": {
+          "mineral": "500",
+          "toxin": "20"
+        },
+        "outputs": {
+          "deepmass": "0.01"
+        },
+        "enzymePerSec": "2",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "layer",
+        "layer": "mantle"
+      },
+      "upgradableTo": null,
+      "desc": "钻入上古生态的尸骸层。你取出的每一克，都是一段被中断的历史。"
+    },
+    {
+      "id": "hive_hub",
+      "name": "虫巢枢纽",
+      "nameEn": "Hive Hub",
+      "class": "special",
+      "catalystTag": "neural",
+      "tier": 3,
+      "layer": "mantle",
+      "cost": {
+        "spore": "50000",
+        "signal": "500",
+        "law": "1"
+      },
+      "costGrowth": 1.35,
+      "buildTime": 30,
+      "recipe": {
+        "inputs": {
+          "pheromone": "50"
+        },
+        "outputs": {},
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "global": {
+          "allProductionMul": 1.1
+        }
+      },
+      "unlock": {
+        "type": "prestige",
+        "level": 3
+      },
+      "upgradableTo": null,
+      "desc": "整个网络终于有了一个「中心」。你开始怀疑自己还算不算一株真菌。"
+    },
+    {
+      "id": "mirror_node",
+      "name": "镜像节点",
+      "nameEn": "Mirror Node",
+      "class": "special",
+      "catalystTag": "neural",
+      "tier": 3,
+      "layer": "mantle",
+      "cost": {
+        "spore": "30000",
+        "signal": "300",
+        "sclerotium": "100"
+      },
+      "costGrowth": 1.33,
+      "buildTime": 25,
+      "recipe": {
+        "inputs": {},
+        "outputs": {},
+        "enzymePerSec": "0",
+        "depletion": 0,
+        "structural": {
+          "mirrorAdjacent": 0.5
+        }
+      },
+      "unlock": {
+        "type": "prestige",
+        "level": 3
+      },
+      "upgradableTo": null,
+      "desc": "它不生产任何东西，只是让邻居的生产发生两次。"
+    },
+    {
+      "id": "pact_nest",
+      "name": "契约巢",
+      "nameEn": "Pact Nest",
+      "class": "symbiont",
+      "catalystTag": "symbiotic",
+      "tier": 2,
+      "layer": "topsoil",
+      "cost": {
+        "spore": "400",
+        "sugar": "350",
+        "honeydew": "100"
+      },
+      "costGrowth": 1.22,
+      "buildTime": 8,
+      "recipe": {
+        "inputs": {
+          "honeydew": "50"
+        },
+        "outputs": {
+          "pact": "0.05"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "honeydew",
+        "amount": "150"
+      },
+      "upgradableTo": null,
+      "desc": "把蜜露送到地表的交易所。维兰人开始用你的名字发誓。"
+    },
+    {
+      "id": "gene_splicer",
+      "name": "基因剪接器",
+      "nameEn": "Gene Splicer",
+      "class": "symbiont",
+      "catalystTag": "symbiotic",
+      "tier": 2,
+      "layer": "aquifer",
+      "cost": {
+        "spore": "1200",
+        "pact": "200",
+        "honeydew": "500"
+      },
+      "costGrowth": 1.24,
+      "buildTime": 10,
+      "recipe": {
+        "inputs": {
+          "pact": "20",
+          "spore": "10"
+        },
+        "outputs": {
+          "gene": "0.05"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "pact",
+        "amount": "50"
+      },
+      "upgradableTo": null,
+      "desc": "从契约物种身上剪下可用的片段。它们同意了吗？这个问题不再重要。"
+    },
+    {
+      "id": "stardust_collector",
+      "name": "星尘收集器",
+      "nameEn": "Stardust Collector",
+      "class": "meta",
+      "catalystTag": "meta",
+      "tier": 3,
+      "layer": "mantle",
+      "cost": {
+        "deepmass": "5000",
+        "core": "80"
+      },
+      "costGrowth": 1.4,
+      "buildTime": 40,
+      "recipe": {
+        "inputs": {
+          "deepmass": "1000"
+        },
+        "outputs": {
+          "stardust": "0.0001"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "deepmass",
+        "amount": "200"
+      },
+      "upgradableTo": null,
+      "desc": "在深菌质里筛出不属于这颗星球的尘埃。"
+    },
+    {
+      "id": "law_loom",
+      "name": "法则织机",
+      "nameEn": "Law Loom",
+      "class": "meta",
+      "catalystTag": "meta",
+      "tier": 3,
+      "layer": "mantle",
+      "cost": {
+        "stardust": "500",
+        "deepmass": "20000"
+      },
+      "costGrowth": 1.45,
+      "buildTime": 60,
+      "recipe": {
+        "inputs": {
+          "stardust": "100"
+        },
+        "outputs": {
+          "law": "0.00002"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "stardust",
+        "amount": "50"
+      },
+      "upgradableTo": null,
+      "desc": "把星尘纺成一条可以修改的自然规律。织机的另一头连着什么，你不知道。"
+    },
+    {
+      "id": "void_culture",
+      "name": "虚空培养床",
+      "nameEn": "Void Culture",
+      "class": "special",
+      "catalystTag": "meta",
+      "tier": 3,
+      "layer": "voidbed",
+      "cost": {
+        "voidspore": "1"
+      },
+      "costGrowth": 1.6,
+      "buildTime": 60,
+      "recipe": {
+        "inputs": {
+          "deepmass": "200"
+        },
+        "outputs": {
+          "sclerotium": "40"
+        },
+        "enzymePerSec": "0",
+        "depletion": 0
+      },
+      "unlock": {
+        "type": "resource",
+        "resource": "voidspore",
+        "amount": "1"
+      },
+      "upgradableTo": null,
+      "desc": "它把深菌质喂给一道缝，缝里吐出你无法命名但确实能用的东西。"
+    }
+  ]
+}
