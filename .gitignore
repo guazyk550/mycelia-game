@@ -1,13 +1,19 @@
 node_modules/
 dist/
 .vite/
+coverage/
+*.tsbuildinfo
 *.log
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
 saves/
 sim-out/
 
-# Capacitor 生成的原生工程（可随时用 cap add android 重建）
+# Capacitor 生成的原生工程（可随时用 cap add android 重建；
+# 其中 local.properties 会写入本机 Android SDK 路径，不应入库）
 android/
 
-# 交付物里的 APK 体积较大，按需决定是否入库
-release/*.apk
+# 交付物里的 APK 体积较大，不入库，改为在 GitHub Releases 发布
+*.apk

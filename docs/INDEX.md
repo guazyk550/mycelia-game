@@ -6,7 +6,7 @@ Mycelia 的设计、数值、验证与证据都在这里。按"想了解什么"�
 
 | 位置 | 内容 |
 |---|---|
-| [`../release/mycelia-debug.apk`](../release/mycelia-debug.apk) | 手机安装包（4.5 MB） |
+| [Releases](../../releases) | 手机安装包 `mycelia-debug.apk`（4.5 MB，体积原因不入库） |
 | [`../release/README.md`](../release/README.md) | 装机步骤与手机手势对照表 |
 | [`MOBILE.md`](MOBILE.md) | 完整移动端说明（PWA / APK、已知问题） |
 

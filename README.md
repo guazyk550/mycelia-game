@@ -1,5 +1,7 @@
 # 共生之网 · Mycelia
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 拓扑驱动的增量游戏（incremental / idle）。你是一颗孢子，从黑暗土壤里的第一根菌丝，
 长成覆盖整个行星、与所有生命签订契约的地下网络。
 
@@ -63,7 +65,7 @@ npm run build && npx vite preview --port 4175   # 生产构建 + 预览
 
 | 位置 | 内容 |
 |---|---|
-| `release/mycelia-debug.apk` | **手机安装包**（4.5 MB，debug 包，可直接安装试玩） |
+| [Releases](../../releases) 里的 `mycelia-debug.apk` | **手机安装包**（4.5 MB，debug 包，可直接安装试玩）。体积原因不入库，请在 Releases 页面下载 |
 | `release/README.md` | 装机步骤、手机手势对照表、重新构建方法 |
 | `docs/MOBILE.md` | 完整的移动端说明（PWA / APK 两条路线、已知问题） |
 | `docs/ACCEPTANCE.md` | 验收报告：逐轮交付物、验证矩阵、已知问题诚实清单 |
@@ -76,7 +78,7 @@ mycelia/
 ├── data/            # 全部游戏内容（12 张表，498 条目；代码内不留平衡数字）
 ├── docs/            # 见 docs/INDEX.md（设计 / 数值 / 验收 / 截图 / 手机说明）
 ├── public/          # PWA 资源（manifest / service worker / 图标）
-├── release/         # 交付物：APK + 安装说明
+├── release/         # 交付物：安装说明（APK 见 Releases 页面）
 ├── scripts/         # 数据校验、可达性分析、端到端烟测、移动端审计、截图生成
 ├── src/
 │   ├── core/        # 纯逻辑内核：不依赖 DOM，可被 Node 无头运行与测试
@@ -161,3 +163,39 @@ npm run shots                             # 生成播放截图 → docs/shots/02
 | 2000 节点 | 5.90 ms | 5.34 ms |
 
 （设计目标：1000 节点 ≥30fps；实测 ≈173fps）
+
+## 开源仓库里没有的东西
+
+为了让仓库保持轻量、且不夹带任何本机信息，下列内容**不在版本库里**，需要时按对应命令重建：
+
+| 缺失内容 | 原因 | 怎么重建 |
+|---|---|---|
+| `node_modules/` | 依赖，体积大 | `npm install` |
+| `dist/` | 构建产物 | `npm run build` |
+| `android/` | Capacitor 生成的原生工程，含本机 SDK 路径（`local.properties`） | `npx cap add android` 后 `npm run build:mobile` |
+| `release/*.apk` | 4.5 MB 二进制 | `npm run build:apk`，或直接下载 Releases 里的成品 |
+| 存档 / 模拟输出（`saves/`、`sim-out/`） | 运行时数据 | 游玩或 `npm run sim` 自动生成 |
+
+## 参与贡献
+
+欢迎提 Issue 和 PR。提交前请确认这些命令全绿：
+
+```bash
+npm install
+npm run typecheck   # 类型检查
+npm test            # 单元与行为测试
+npm run check:data  # 数据表 schema + 引用 + 数量达标
+npm run check:reach # 资源可达性
+```
+
+约定详见上面的「工程约定」一节 —— 尤其：**平衡数值只能来自 `data/**.json`，代码里不许硬编码**。
+
+## 许可证
+
+本项目以 [MIT 许可证](LICENSE) 开源：你可以自由地使用、修改、分发、商用，只需在副本中保留版权与许可声明。
+
+```
+Copyright (c) 2026 gua550
+```
+
+游戏内的美术资源（`docs/shots/` 截图、图标等）随代码一并按 MIT 授权。
